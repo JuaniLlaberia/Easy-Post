@@ -19,7 +19,7 @@ const LoginPage = () => {
       console.log(err);
     }
     //Redirect to proper page if user => user and if company => company
-    // router.push(`/home`)
+    router.push('/home');
   };
 
   return (

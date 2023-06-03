@@ -1,7 +1,7 @@
 const JobPage = () => {
   return (
     <div>
-      JOB INFO
+      Job Page
     </div>
   )
 }

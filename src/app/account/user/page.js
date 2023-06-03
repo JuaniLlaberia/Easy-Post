@@ -6,6 +6,9 @@ import { useState } from 'react';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '@/firebase_config';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 
 const UserSignUpPage = () => {
   const {createAccount, currentAcc} = useAuthContext();
@@ -41,32 +44,49 @@ const UserSignUpPage = () => {
         phone: '',
         cvPDF: '',
         userId: currentAcc?.uid,
-        type: 'user'
+        type: 'user',
+        inbox: [],
+        following: [],
+        savedPosts: [],
       });
     } catch(err) {
       console.log(err);
     }
     //Redirect to login page
-    router.push('/user/home');
+    router.push('/home');
   };
 
   return (
     <main className='user-signin-page'>
-      {currentAcc?.uid}
-      <div className='user-new-container'>
         <form className='user-new-form' onSubmit={handleNewUser}>
-          <h1>New account</h1>
-          <label htmlFor="full-name">Full Name</label>
-          <input value={fullName} required id='full-name' type='text' placeholder='Enter your full name' onChange={e => setFullName(e.target.value)}/>
-          <label  htmlFor='email'>Email</label>
-          <input value={email} required id='email' type='email' placeholder="Enter your email address" onChange={e => setEmail(e.target.value)}/>
-          <label htmlFor="password">Password</label>
-          <input value={password} required id="password" type="password" placeholder="Enter your password" onChange={e => setPassword(e.target.value)}/>
-          <label htmlFor="con-password">Confirm Password</label>
-          <input value={confPassword} required id="con-password" type="password" placeholder="Confirm your password" onChange={e => setConfPassword(e.target.value)}/>
-          <button>Create account</button>
+          <div>
+            <h1 className='form-title'>Sign Up</h1>
+            <p className='form-subtitle'>Let's create a new user account</p>
+          </div>
+          <div className='input-field'>
+            <input className='input-form' value={fullName} required id='full-name' type='text' onChange={e => setFullName(e.target.value)}/>
+            <label className='floating-label' htmlFor="full-name">Full Name</label>
+          </div>
+          <div className='input-field'>
+            <input className='input-form' value={email} required id='email' type='email' onChange={e => setEmail(e.target.value)}/>
+            <label className='floating-label' htmlFor='email'>Email Address</label>
+          </div>
+          <div className='combine-inputs'>
+            <div className='input-field'>
+              <input className='input-form' value={password} required id="password" type="password" onChange={e => setPassword(e.target.value)}/>
+              <label className='floating-label' htmlFor="password">Password</label>
+            </div>
+            <div className='input-field'>
+              <input className='input-form' value={confPassword} required id="con-password" type="password" onChange={e => setConfPassword(e.target.value)}/>
+              <label className='floating-label' htmlFor="con-password">Confirm Password</label>
+            </div>
+          </div>
+          <div className='btns-container'>
+            <button className='create-acc-button'>Create Account</button>
+            <Link href='/account' className='login-already'>Already register?</Link>
+          </div>
         </form>
-      </div>
+        <Link href='/' className='go-back'><FontAwesomeIcon icon={faArrowLeftLong}/> Go back</Link>
     </main>
   )
 }
