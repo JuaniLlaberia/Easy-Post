@@ -1,0 +1,61 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Landing Page styling */
+
+.landing-page {
+    height: 100vh;
+    background-color: rgb(45, 45, 49);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.landing-page h2 {
+    font-size: 5rem;
+    color: rgb(255, 255, 255);
+}
+
+.landing-page p {
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.main-btns {
+    display: flex;
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.initial-btn {
+    text-decoration: none;
+    background-color: rgb(220, 36, 245);
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 7.5px 15px;
+    border-radius: 8px;
+    transition: all .3s ease;
+}
+
+.initial-btn:hover {
+    cursor: pointer;
+    transform: translateY(4%);
+    background-color: rgb(68, 68, 255);
+}
+
+.login-btn {
+    position: absolute;
+    top: 2.5%;
+    right: 5%;
+    text-decoration: none;
+    color: white;
+    background-color: blue;
+    padding: 5px 10px;
+    border-radius: 8px;
+}
