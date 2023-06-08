@@ -3,6 +3,7 @@
 import { useAuthContext } from "@/context/AuthContext"
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
+import Link from "next/link";
 
 const LoginPage = () => {
   const {loginAccount, currentAcc} = useAuthContext();
@@ -29,7 +30,7 @@ const LoginPage = () => {
         <input required value={password} type="password" placeholder="password" onChange={e => setPassword(e.target.value)}/>
         <button>Log in</button>
       </form>
-      <div>This user is logged in: {currentAcc?.uid}</div>
+      <Link href='/account/reset-password'>Forgot password?</Link>
     </main>
   )
 }
