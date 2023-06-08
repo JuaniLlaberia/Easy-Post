@@ -1,7 +1,7 @@
 'use client'
 
 import { auth } from "@/firebase_config";
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
@@ -17,6 +17,11 @@ export const AuthProvider = ({children}) => {
     //Create user/company account
     const createAccount = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password);
+    };
+
+    //Reset password with email
+    const resetPassword = (email) => {
+        return sendPasswordResetEmail(auth, email);
     };
 
     //Logout from account
@@ -36,7 +41,8 @@ export const AuthProvider = ({children}) => {
             currentAcc,
             loginAccount,
             createAccount,
-            logout
+            logout,
+            resetPassword
         }}>
             {children}
         </AuthContext.Provider>
