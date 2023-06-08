@@ -2,49 +2,25 @@
 
 import { useAuthContext } from '@/context/AuthContext'
 import '../../../../assets/account.css';
-import { useState } from 'react';
-import { addDoc, collection } from 'firebase/firestore';
-import { db } from '@/firebase_config';
+import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 
 const UserSignUpPage = () => {
-  const {createAccount, currentAcc} = useAuthContext();
+  const {createAccount, setCurrentAcc} = useAuthContext();
   const router = useRouter();
-  const [fullName, setFullName] = useState({name:'', isTouched:false});
   const [email, setEmail] = useState({email:'', isTouched:false});
   const [password, setPassword] = useState({password:'', isTouched:false});
   const [confPassword, setConfPassword] = useState({password:'', isTouched:false});
   const { type } = useParams();
 
-  const userObject = {
-    name: fullName.name,
-    email: email.email,
-    position: '',
-    location: '',
-    profileImg: '',
-    cvPDF: '',
-    userId: currentAcc?.uid,
-    type: 'user',
-    inbox: [],
-    following: [],
-    savedPosts: [],
-  };
+  useEffect(() => {
+    setCurrentAcc(null)
+  }, [])
 
-  const companyObject = {
-    name: fullName.name,
-    email: email.email,
-    profileImg: '',
-    userId: currentAcc?.uid,
-    type: 'company',
-    inbox: [],
-    logoId: '',
-    logoPath: '',
-  };
-
-  //password validation
+  //Password validation
   const validatePasswordFormat = (password) => {
     const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})(?=.*[!@#$%^&*])");
     return strongRegex.test(password);
@@ -53,7 +29,6 @@ const UserSignUpPage = () => {
   const handleNewUser = async e => {
     e.preventDefault();
 
-    //apply some regex later for password/email/phone
     //We check that the data is OK
     if(password.password !== confPassword.password) {
       console.log('Password dont match');
@@ -67,17 +42,8 @@ const UserSignUpPage = () => {
       console.log(err);
     };
 
-    //Save data in firestore
-    try {
-      await addDoc(collection(db, 'accountsData'),
-        type === 'user' ? userObject : companyObject
-      );
-    } catch(err) {
-      console.log(err);
-    }
-
     //Redirect to profile page to finish data filling
-    router.push('/home');
+    router.push(`/account/${type}/info`);
   };
 
   return (
@@ -86,10 +52,6 @@ const UserSignUpPage = () => {
           <div>
             <h1 className='form-title'>Sign Up</h1>
             <p className='form-subtitle'>Let's create a new {type} account</p>
-          </div>
-          <div className='input-field'>
-            <input className={`input-form ${fullName.isTouched && fullName.name.length < 1 ? 'invalid-input' : ''}`} value={fullName.name} required id='full-name' type='text' onChange={e => setFullName({...fullName, name:e.target.value})} onBlur={() => setFullName({...fullName, isTouched:true})}/>
-            <label className={`floating-label ${fullName.isTouched && fullName.name.length < 1 ? 'invalid-label' : ''}`} htmlFor="full-name">{type === 'user' ? 'Full Name' : 'Comapny Name'}</label>
           </div>
           <div className='input-field'>
             <input className={`input-form ${email.isTouched && email.email.length < 1 ? 'invalid-input' : ''}`} value={email.email} required id='email' type='email' onChange={e => setEmail({...email, email:e.target.value})} onBlur={() => setEmail({...email, isTouched:true})}/>
