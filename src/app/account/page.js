@@ -1,7 +1,7 @@
 'use client'
 
 import { useAuthContext } from "@/context/AuthContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,11 +11,15 @@ import CustomInput from "@/components/CustomInput";
 import { ClipLoader } from 'react-spinners';
 
 const LoginPage = () => {
-  const {loginAccount, setCurrentAcc} = useAuthContext();
+  const {loginAccount, currentAcc} = useAuthContext();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loadingBtn, setLoadingBtn] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    if(currentAcc !== null) router.push('home');
+  }, []);
 
   const handleLogin = async e => {
     e.preventDefault();
