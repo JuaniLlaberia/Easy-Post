@@ -1,0 +1,75 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.my-profile-page {
+    padding: 10px 100px 10px 100px;
+}
+
+.personal-info img{
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-top {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+    position: relative;
+    /* border-bottom: 1px solid black; */
+}
+
+.profile-top h1 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.profile-top h6 {
+    font-size: .9rem;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.575);
+}
+
+.myprofile-btns {
+    position: absolute;
+    top: 0;
+    right: 5%;
+    display: flex;
+    gap: 5px;
+}
+
+.profile-top button {
+    padding: 5px;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    font-weight: 600;
+    transition: all .3s ease;
+}
+
+.profile-top button:hover {
+    cursor: pointer;
+    transform: translateY(4%);
+}
+
+.edit {
+    background-color: rgb(229, 83, 248);
+}
+
+.logout {
+    background-color: rgb(252, 56, 56);
+}
+
+.myprofile-subtitles {
+    color: rgba(0, 0, 0, 0.575);
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.description {
+    text-align: justify;
+}

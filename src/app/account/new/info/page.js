@@ -5,7 +5,7 @@ import userImg from '../../../../assets/user_placeholder.png'
 import '../../../../assets/info.css'
 import '../../../../assets/account.css'
 import { useState } from 'react'
-import { useParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useAuthContext } from '@/context/AuthContext'
 import { doc, setDoc } from 'firebase/firestore'
 import { db, storage } from '@/firebase_config'
@@ -16,14 +16,12 @@ import { ClipLoader } from 'react-spinners'
 
 
 const InfoPage = () => {
-    const { type } = useParams();
     const {currentAcc} = useAuthContext();
     const router = useRouter();
     const [profileImg, setProfileImg] = useState(null);
     const [previewImg, setPreviewImg] = useState(userImg);
-    const [cv, setCv] = useState(null);
     const [description, setDescription] = useState('');
-    const [field, setField] = useState('');
+    const [state, setState] = useState('');
     const [name, setName] = useState('');
     const [loadingBtn, setLoadingBtn] = useState(false);
 
@@ -57,61 +55,20 @@ const InfoPage = () => {
         console.log(err);
       }
 
-      //Store cv in cloud for users
-      let cvPath = '';
-      let cvID = '';
-
-      if(type === 'user') {
-        if(!cv) {
-          console.log('No Cv');
-          setLoadingBtn(false);
-          return;
-        };
-
-        cvID = uuidv4();
-
-        const storageRefPDF = ref(storage, `${cvID}.pdf`);
-        try {
-          await uploadBytes(storageRefPDF, cv);
-          cvPath = await getDownloadURL(storageRefPDF);
-        } catch(err) {
-          console.log(err);
-        }
-      };
-
-      //Data
-      const userObject = {
-        name: name,
-        email: currentAcc?.email,
-        position: field,
-        profileImg: filePath,
-        profileImgID: fileID,
-        cvPDF: cvPath,
-        cvPDFID: cvID,
-        userId: currentAcc?.uid,
-        type: 'user',
-        description: description,
-        inbox: [],
-        following: [],
-        savedPosts: [],
-      };
-
-      const companyObject = {
-        name: name,
-        email: currentAcc?.email,
-        profileImg: filePath,
-        profileImgID: fileID,
-        userId: currentAcc?.uid,
-        type: 'company',
-        inbox: [],
-        description: description,
-      };
-
       //Store account in database
       try {
-        await setDoc(doc(db, 'accountsData', currentAcc?.uid),
-          type === 'user' ? userObject : companyObject
-        );
+        await setDoc(doc(db, 'accountsData', currentAcc?.uid), {
+          name: name,
+          email: currentAcc?.email,
+          state: state,
+          profileImg: filePath,
+          profileImgID: fileID,
+          userId: currentAcc?.uid,
+          description: description,
+          inbox: [],
+          following: [],
+          savedPosts: [],
+        });
       } catch(err) {
         console.log(err);
       }
@@ -133,15 +90,13 @@ const InfoPage = () => {
                 setPreviewImg(URL.createObjectURL(e.target.files[0]))
                 }}/>
             <label htmlFor="profile-img"><Image src={previewImg} width={150} height={150} className='profile-img' alt='profile'/></label>
-            <input id="profile-cv" type="file" style={{display:'none'}} accept="application/pdf" onChange={e => setCv(e.target.files[0])}/>
-            {type === 'user' ? <label htmlFor="profile-cv" className='cv'>Add CV</label> : null}
         </div>
         <section className='info-right'>
             <p>Additional Information</p>
-            <CustomInput classInput='input-form' classLabel='floating-label' value={name} id='name' required={true} readonly={false} type='text' onChange={e => setName(e.target.value)} label={`${type === 'user' ? 'Full' : 'Company'} name`}/>
+            <CustomInput classInput='input-form' classLabel='floating-label' value={name} id='name' required={true} readonly={false} type='text' onChange={e => setName(e.target.value)} label='Full Name'/>
             <CustomInput classInput='input-form' classLabel='floating-label' value={currentAcc?.email} required={true} readonly={true} id='email' type='text' label='Email Address'/>
-            <CustomInput classInput='input-form' classLabel='floating-label' value={description} textarea={true} id='description' required={true} readonly={false} type='text' onChange={e => setDescription(e.target.value)} label='Description'/>
-            <CustomInput classInput='input-form' classLabel='floating-label' value={field} id='position' required={true} readonly={false} type='text' onChange={e => setField(e.target.value)} label='Your Field'/>
+            <CustomInput classInput='input-form' classLabel='floating-label' value={state} id='position' required={true} readonly={false} type='text' onChange={e => setState(e.target.value)} label='Your State' max={25}/>
+            <CustomInput classInput='input-form' classLabel='floating-label' value={description} textarea={true} id='description' required={true} readonly={false} type='text' onChange={e => setDescription(e.target.value)} max={250} label='Description (max 250 char.)'/>
         </section>
       </section>
       <section className='btn-section'>

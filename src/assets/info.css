@@ -9,6 +9,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: rgb(45, 45, 49);
     height: 100vh;
 }
 
@@ -19,6 +20,7 @@
     position: absolute;
     top: 2.5%;
     left: 2.5%;
+    color: white;
 }
 
 .input-field {
@@ -33,7 +35,7 @@
 
 .info-section {
     border: 1px solid rgba(191, 191, 191, 0.33);
-    box-shadow: 0 2px 4px black;
+    box-shadow: 0 4px 8px rgb(0, 0, 0);
     border-radius: 12px;
     margin: 15px;
     margin-bottom: 0;
@@ -42,6 +44,7 @@
     justify-content: space-around;
     width: 90vw;
     gap: 10px;
+    background-color: white;
 }
 
 .info-left {
@@ -54,6 +57,7 @@
 
 .profile-img {
     border-radius: 50%;
+    object-fit: cover;
     transition: all .3s ease;
 }
 

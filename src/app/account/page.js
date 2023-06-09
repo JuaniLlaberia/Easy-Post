@@ -1,7 +1,7 @@
 'use client'
 
 import { useAuthContext } from "@/context/AuthContext";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from 'next/navigation';
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,10 +16,6 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const [loadingBtn, setLoadingBtn] = useState(false);
   const router = useRouter();
-
-  useEffect(() => {
-    setCurrentAcc(null)
-  }, []);
 
   const handleLogin = async e => {
     e.preventDefault();
