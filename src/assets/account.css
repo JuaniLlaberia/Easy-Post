@@ -116,6 +116,16 @@ textarea.input-form + .floating-label {
     transition: all .3s ease;
 }
 
+.create-acc-button:disabled {
+    cursor: not-allowed;
+    background-color: rgb(198, 53, 217);
+}
+
+.create-acc-button:disabled:hover {
+    cursor: not-allowed;
+    background-color: rgb(198, 53, 217);
+}
+
 .create-acc-button:hover, .reset-btn:hover {
     cursor: pointer;
     transform: translateY(4%);

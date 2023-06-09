@@ -11,29 +11,39 @@ import { doc, setDoc } from 'firebase/firestore'
 import { db, storage } from '@/firebase_config'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { v4 as uuidv4 } from 'uuid';
+import CustomInput from '@/components/CustomInput'
+import { ClipLoader } from 'react-spinners'
+
 
 const InfoPage = () => {
     const { type } = useParams();
     const {currentAcc} = useAuthContext();
     const router = useRouter();
-    const [profileImg, setProfileImg] = useState({});
+    const [profileImg, setProfileImg] = useState(null);
     const [previewImg, setPreviewImg] = useState(userImg);
-    const [cv, setCv] = useState({});
+    const [cv, setCv] = useState(null);
     const [description, setDescription] = useState('');
     const [field, setField] = useState('');
     const [name, setName] = useState('');
+    const [loadingBtn, setLoadingBtn] = useState(false);
 
-
-    //FIX PROBLEM => CHECKING THAT WE UPLOAD A CV AND IMG, in case we dont -> Dont submit (maybe transforming everything into a form...?)
-    const handleFinish = async () => {
+    const handleFinish = async e => {
+      e.preventDefault();
+      setLoadingBtn(false);
       //Check that all fields are correct
       if(name === '' && field === '' && description === '') {
         console.log('Must fill all fields');
         return;
       };
 
+      setLoadingBtn(true);
+
       //Store image in cloud
-      if(!profileImg) return;
+      if(!profileImg) {
+        console.log('No image');
+        setLoadingBtn(false);
+        return;
+      };
 
       let filePath = '';
       const fileID = uuidv4();
@@ -52,7 +62,11 @@ const InfoPage = () => {
       let cvID = '';
 
       if(type === 'user') {
-        if(!cv) return;
+        if(!cv) {
+          console.log('No Cv');
+          setLoadingBtn(false);
+          return;
+        };
 
         cvID = uuidv4();
 
@@ -103,10 +117,10 @@ const InfoPage = () => {
       }
 
       router.push('/home');
-    }
+    };
 
   return (
-    <main className="additional-info-page">
+    <form className="additional-info-page" onSubmit={handleFinish}>
       <section className='title-section'>
         <h3>We're almost there</h3>
         <p>You just need to fill some additional information to finish your profile</p>
@@ -122,30 +136,18 @@ const InfoPage = () => {
             <input id="profile-cv" type="file" style={{display:'none'}} accept="application/pdf" onChange={e => setCv(e.target.files[0])}/>
             {type === 'user' ? <label htmlFor="profile-cv" className='cv'>Add CV</label> : null}
         </div>
-        <form className='info-right'>
+        <section className='info-right'>
             <p>Additional Information</p>
-            <div className='input-field'>
-                <input className="input-form" value={name} id="name" required  type="text" onChange={e => setName(e.target.value)}/>
-                <label className="floating-label" htmlFor="name">{type === 'user' ? 'Full' : 'Company'} name</label>
-            </div>
-            <div className='input-field'>
-                <input className="input-form" id="email" required  type="text" value={currentAcc?.email} readOnly/>
-                <label className="floating-label" htmlFor="email">Email Address</label>
-            </div>
-            <div className='input-field'>
-                <textarea value={description} className="input-form" id="description" required  type="text" onChange={e => setDescription(e.target.value)}/>
-                <label className="floating-label" htmlFor="description">Description</label>
-            </div>
-            <div className='input-field'>
-                <input value={field} className="input-form" id="position" required  type="text" onChange={e => setField(e.target.value)}/>
-                <label className="floating-label" htmlFor="position">Your Field</label>
-            </div>
-        </form>
+            <CustomInput classInput='input-form' classLabel='floating-label' value={name} id='name' required={true} readonly={false} type='text' onChange={e => setName(e.target.value)} label={`${type === 'user' ? 'Full' : 'Company'} name`}/>
+            <CustomInput classInput='input-form' classLabel='floating-label' value={currentAcc?.email} required={true} readonly={true} id='email' type='text' label='Email Address'/>
+            <CustomInput classInput='input-form' classLabel='floating-label' value={description} textarea={true} id='description' required={true} readonly={false} type='text' onChange={e => setDescription(e.target.value)} label='Description'/>
+            <CustomInput classInput='input-form' classLabel='floating-label' value={field} id='position' required={true} readonly={false} type='text' onChange={e => setField(e.target.value)} label='Your Field'/>
+        </section>
       </section>
       <section className='btn-section'>
-        <button onClick={handleFinish} className='create-acc-button'>Finish</button>
+        <button disabled={loadingBtn} className='create-acc-button'>{loadingBtn ? <ClipLoader color="#e981f7" size='20px'/> : 'Finish'}</button>
       </section>
-    </main>
+    </form>
   )
 }
 

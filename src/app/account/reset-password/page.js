@@ -6,6 +6,7 @@ import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 import { useAuthContext } from '@/context/AuthContext'
 import { useState } from 'react'
+import CustomInput from '@/components/CustomInput'
 
 const ResetPasswordPage = () => {
   const { resetPassword } = useAuthContext();
@@ -29,10 +30,7 @@ const ResetPasswordPage = () => {
                 <h1>Reset Password</h1>
                 <p>You will receive all the information needed at your email shortly</p>
             </div>
-            <div className='input-field'>
-                <input value={email} className='input-form' required type='text' id='reset-field' onChange={e => setEmail(e.target.value)}/>
-                <label className='floating-label' htmlFor="reset-field">Email Address</label>
-            </div>
+            <CustomInput classInput='input-form' classLabel='floating-label' value={email} id='reset-field' required={true} readonly={false} type='text' onChange={e => setEmail(e.target.value)} label='Email Address'/>
             <div className='btns-container'>
                 <button className='reset-btn' onClick={() => newPassword(email)}>Reset</button>
             </div>
