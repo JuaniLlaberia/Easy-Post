@@ -7,6 +7,7 @@
 .my-profile-page {
     display: flex;
     justify-content: center;
+    padding-top: 60px;
 }
 
 .personal-info {
@@ -63,6 +64,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 60px;
 }
 
 .create-post-container {
@@ -236,6 +238,7 @@ form button:disabled {
     background-color: transparent;
     border: none;
     color: white;
+    cursor: pointer;
 }
 
 .post-page {
@@ -243,6 +246,7 @@ form button:disabled {
     flex-direction: column;
     align-items: center;
     height: 100vh;
+    padding-top: 60px;
 }
 
 .post-page-contaiener {
@@ -326,7 +330,7 @@ form button:disabled {
     outline: none;
 }
 
-.new-comment button {
+.new-comment button, .modal-edit-post button {
     border-radius: 12px;
     border: none;
     background-color: rgb(229, 83, 248);
@@ -334,7 +338,8 @@ form button:disabled {
     font-weight: 600;
     padding: 10px;
     cursor: pointer;
-    width: 10vw;
+    width: 12vw;
+    min-width: 70px;
 }
 
 .comments-container {
@@ -368,4 +373,70 @@ form button:disabled {
     align-items: center;
     gap: 10px;
     font-size: 1.2rem;
+}
+
+.modal-edit-post, .delete-modal {
+    position: fixed;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -40%);
+    background-color: rgb(45, 45, 49);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgb(45, 44, 44);
+    width: 70vw;
+    max-width: 600px;
+    height: 200px;
+    z-index: 1;
+}
+
+.modal-edit-post h6 {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.modal-edit-post textarea {
+    resize: none;
+    width: 100%;
+    height: 100px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: white;
+}
+
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
+.delete-modal {
+    width: 40vw;
+    max-width: 300px;
+    height: auto;
+}
+
+.delete-modal h6 {
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.delete-modal div button {
+    padding: 5px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 400;
+    color: black;
+    cursor: pointer;
+}
+
+.delete-modal div button.remove {
+    background-color: rgb(255, 54, 54);
+    color: white;
 }

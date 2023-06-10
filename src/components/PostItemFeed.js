@@ -18,8 +18,8 @@ const PostItemFeed = ({body, img, likeNum,by, userName, userImg, id}) => {
             </div>
         </Link>
         <div className='post-btns'>
-            <button className='post-btn'>{likeNum} <FontAwesomeIcon size="2x" icon={faHeart}/></button>
-            <button className='post-btn'><FontAwesomeIcon size="2x" icon={faBookmark}/></button>
+            <button className='post-btn'>{likeNum} <FontAwesomeIcon icon={faHeart}/></button>
+            <button className='post-btn'><FontAwesomeIcon icon={faBookmark}/></button>
         </div>
     </li>
   )
