@@ -36,7 +36,7 @@ const CreateComment = ({postId}) => {
 
   return (
     <div className='new-comment'>
-      <Image src={userData.profileImg} alt="user" width={50} height={50}/>
+      <Image draggable={false} src={userData.profileImg} alt="user" width={50} height={50}/>
       <textarea value={commentBody} placeholder="Write a comment (max 150 char.)" maxLength={150} onChange={e => setCommentBody(e.target.value)}/>
       <button disabled={loadingBtn} onClick={handleNewComment}>{loadingBtn ? <ClipLoader color='#e981f7' size='10px'/> : 'Comment'}</button>
     </div>
