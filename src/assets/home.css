@@ -177,7 +177,7 @@ form button:disabled {
     padding-bottom: 25px;
 }
 
-.link-to-profile {
+.link-to-profile{
    display: flex;
    align-items: center;
    gap: 15px;
@@ -186,7 +186,7 @@ form button:disabled {
    padding: 10px;
 }
 
-.link-to-profile img{
+.link-to-profile img, .post-top-section img{
     border-radius: 50%;
     object-fit: cover;
  }
@@ -196,7 +196,7 @@ form button:disabled {
     color: white;
  }
 
- .link-to-profile p {
+ .link-to-profile p , .post-top-section p, .edited{
     font-size: .8rem;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.508);
@@ -204,7 +204,6 @@ form button:disabled {
 
  .link-to-post {
     text-decoration: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.105);
     padding-bottom: 10px;
  }
 
@@ -221,6 +220,8 @@ form button:disabled {
 .link-to-post p {
     padding: 10px;
     color: white;
+    word-wrap: break-word;
+    text-align: justify;
 }
 
 .post-btns {
@@ -235,4 +236,103 @@ form button:disabled {
     background-color: transparent;
     border: none;
     color: white;
+}
+
+.post-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.post-page-contaiener {
+    background-color: rgb(45, 45, 49);
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 1px 5px black;
+    width: 70vw;
+    min-width: 300px;
+    max-width: 600px;
+    position: relative;
+}
+
+.post-top-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.105);
+}
+
+.post-top-section a {
+    text-decoration: none;
+    color: white;
+}
+
+.post-body {
+    color: white;
+    padding: 10px;
+    word-wrap: break-word;
+    text-align: justify;
+    width: 69vw;
+}
+
+.post-img {
+    width: auto;
+    max-width: 100%;
+    min-width: 50px;
+    height: auto;
+    max-height: 400px;
+    min-height: 50px;
+    margin-bottom: 5px;
+    border-radius: 8px;
+}
+
+.profile-post-btns {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    /* gap: 10px; */
+    position: absolute;
+    right: 0;
+    bottom: 85px;
+}
+
+.new-comment {
+    width: 70vw;
+    min-width: 300px;
+    max-width: 600px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.105);
+    margin-top: 50px;
+}
+
+.new-comment img {
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.new-comment textarea {
+    width: 55vw;
+    padding: 5px;
+    height: 50px;
+    resize: none;
+    background-color: transparent;
+    border: none;
+    color: white;
+    outline: none;
+}
+
+.new-comment button {
+    border-radius: 12px;
+    border: none;
+    background-color: rgb(229, 83, 248);
+    color: white;
+    font-weight: 600;
+    padding: 10px;
+    cursor: pointer;
+    width: 10vw;
 }

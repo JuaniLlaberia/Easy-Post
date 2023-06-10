@@ -9,7 +9,7 @@ const PostContainer = () => {
     const [posts, setPosts] = useState([]);
 
     const collectionRef = collection(db, 'posts');
-    const firstQuery = query(collectionRef, orderBy('date', 'desc'), limit(10));
+    const firstQuery = query(collectionRef, orderBy('date', 'desc'), limit(5));
 
     useEffect(() => {
         const suscribe = onSnapshot(firstQuery, snapshot => {
@@ -20,9 +20,8 @@ const PostContainer = () => {
                     id: item.id
                 });
             })
-            setPosts(data);
-            // console.log(data);
-        })
+            setPosts(data)
+        });
 
         return suscribe
     }, []);
