@@ -67,27 +67,20 @@
     border: 1px solid rgba(191, 191, 191, 0.33);
 }
 
-.cv {
-    background-color: transparent;
-    padding: 10px 25px;
-    border: 1px solid black;
-    border-radius: 8px;
-    transition: all .3s ease;
-}
-
-.cv:hover {
-    cursor: pointer;
-    background-color: black;
-    border: 1px solid white;
-    color: white;
-}
-
 .info-right  {
     width: 50vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 25px;
+}
+
+.info-right  p{
+    color: black;
+}
+
+.info-left  p{
+    color: black;
 }
 
 .btn-section {

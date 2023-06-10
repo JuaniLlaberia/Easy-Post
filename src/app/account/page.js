@@ -23,6 +23,7 @@ const LoginPage = () => {
 
   const handleLogin = async e => {
     e.preventDefault();
+  
     setLoadingBtn(false);
 
     if(!email && !password) return;

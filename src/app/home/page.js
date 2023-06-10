@@ -1,12 +1,12 @@
 import CreatePost from "@/components/CreatePost"
-import MainPostContainer from "@/components/MainPostContainer"
 import '../../assets/home.css'
+import PostContainer from "@/components/PostContainer"
 
 const HomePage = () => {
   return (
     <main className='home-page'>
       <CreatePost />
-      <MainPostContainer />
+      <PostContainer />
     </main>
   )
 }

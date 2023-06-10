@@ -89,7 +89,7 @@ const InfoPage = () => {
                 setProfileImg(e.target.files[0])
                 setPreviewImg(URL.createObjectURL(e.target.files[0]))
                 }}/>
-            <label htmlFor="profile-img"><Image src={previewImg} width={150} height={150} className='profile-img' alt='profile'/></label>
+            <label htmlFor="profile-img"><Image src={previewImg} width={250} height={250} className='profile-img' alt='profile'/></label>
         </div>
         <section className='info-right'>
             <p>Additional Information</p>
