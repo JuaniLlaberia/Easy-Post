@@ -63,7 +63,9 @@ const UserSignUpPage = () => {
         userId: user.uid,
         date: serverTimestamp(),
         userImg:'https://firebasestorage.googleapis.com/v0/b/jobs-search-app.appspot.com/o/user_placeholder.png?alt=media&token=82bdb08d-e5eb-40e1-8d15-ccef470959d1&_gl=1*1fxd68*_ga*NTE1MzQ4MjUwLjE2ODM1NDIwOTQ.*_ga_CW55HF8NVT*MTY4NjQ2ODQ4My4yMS4xLjE2ODY0NzU0MTAuMC4wLjA.',
-        userImgId:''
+        userImgId:'',
+        fullName:'',
+        location:'',
       });
       //Redirect user to homepage
       router.push(`/home`);

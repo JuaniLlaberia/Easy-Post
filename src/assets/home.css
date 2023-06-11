@@ -28,36 +28,36 @@
     position: relative;
 }
 
+.profile-user-info {
+    position: relative;
+}
+
 .profile-top h1 {
     font-size: 2rem;
     font-weight: 600;
 }
 
-.profile-state {
+.profile-top p{
     font-size: 1rem;
+    color: rgba(0, 0, 0, 0.605);
     font-weight: 400;
 }
 
-.about-me-text{
-    color: black;
-    font-size: .9rem;
-    font-weight: 400;
-}
+.profile-top button {
+    position: absolute;
+    top: 12.5%;
+    right: 10%;
 
-.about-me-subtitles {
-    color: rgba(0, 0, 0, 0.575);
-    font-size: .9rem;
-    font-weight: 600;
+    background-color: transparent;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
 }
 
 .myprofile-subtitles {
     color: rgba(0, 0, 0, 0.575);
     font-size: 1rem;
     margin-top: 10px;
-}
-
-.description {
-    text-align: justify;
 }
 
 .home-page {

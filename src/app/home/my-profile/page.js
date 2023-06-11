@@ -3,28 +3,33 @@
 import Image from "next/image";
 import '../../../assets/home.css'
 import { useAuthContext } from "@/context/AuthContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLocationDot, faPen, faUser } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
+import UpdateProfileModal from "@/components/UpdateProfileModal";
 
 const MyProfilePage = () => {
   const {userData} = useAuthContext();
-
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <main className='my-profile-page'>
-        <section className='personal-info'>
-            {/* <div className='profile-top'>
-                <Image draggable={false} src={userData?.profileImg} width={180} height={180} alt='user'/>
-                <div>
-                    <h1>{userData?.name} <span className='profile-state'>{userData?.state}</span></h1>
-                    <h6 className='about-me-subtitles'>About Me</h6>
-                    <h6 className='about-me-text'>{userData?.description}</h6>
+        {userData !== null ? <section className='personal-info'>
+            <div className='profile-top'>
+                <Image draggable={false} src={userData?.userImg} width={180} height={180} alt='user'/>
+                <div className='profile-user-info'>
+                    <h1>{userData?.username}</h1>
+                    {userData?.fullName ? <p><FontAwesomeIcon icon={faUser}/> {userData?.fullName}</p> : null}
+                    {userData?.location ? <p><FontAwesomeIcon icon={faLocationDot}/> {userData?.location}</p> : null}
+                    <button onClick={() => setShowModal(true)}><FontAwesomeIcon icon={faPen}/></button>
                 </div>
             </div>
             <h6 className='myprofile-subtitles'>My Posts</h6>
-            <button>Settings/edit profile</button>
             <ul>
                 POSTs CONTAINer
-            </ul> */}
-        </section>
+            </ul>
+        </section> : <div>loading...</div>}
+        {showModal && <UpdateProfileModal toggleModal={() => setShowModal(false)} username={userData?.username} profileImg={userData?.userImg} userLocation={userData?.location} name={userData?.fullName} profileImgId={userData?.userImgId} userId={userData?.userId}/>}
     </main>
   )
 }
