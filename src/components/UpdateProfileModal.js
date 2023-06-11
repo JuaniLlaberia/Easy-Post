@@ -7,6 +7,8 @@ import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage
 import { db, storage } from "@/firebase_config";
 import { v4 as uuidv4 } from 'uuid';
 import { doc, updateDoc } from "firebase/firestore";
+import '../assets/account.css'
+import '../assets/profile.css'
 
 const UpdateProfileModal = ({toggleModal, username, profileImg, profileImgId, name, userLocation, userId}) => {
     const [newProfileImg, setNewProfileImg] = useState(profileImg);
@@ -60,7 +62,7 @@ const UpdateProfileModal = ({toggleModal, username, profileImg, profileImgId, na
 
   return (
     <>
-    <form className='modal-edit-post'>
+    <form className='modal-edit-profile'>
         <section className='info-left'>
             <p>Change profile image</p>
             <input style={{display:'none'}} accept="image/png, image/jpeg" id='profile-img' type="file" onChange={e => {

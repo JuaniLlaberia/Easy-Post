@@ -55,7 +55,7 @@ const PostPage = () => {
               <button className="post-btn" onClick={() => setModalOpenDelete(true)}><FontAwesomeIcon size="2x" icon={faTrashCan}/></button>
             </> : null}
         </div>
-        {/* <CreateComment postId={id}/> */}
+        <CreateComment postId={id}/>
       </div>
       <CommentsContainer commentList={post?.comments}/>
       {modalOpen && <EditPost toggleModal={() => setModalOpen(false)} body={post?.postBody} docID={id}/>}

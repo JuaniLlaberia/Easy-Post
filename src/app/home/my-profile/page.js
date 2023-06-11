@@ -1,16 +1,40 @@
 'use client'
 
 import Image from "next/image";
-import '../../../assets/home.css'
+import '../../../assets/profile.css'
 import { useAuthContext } from "@/context/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faPen, faUser } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UpdateProfileModal from "@/components/UpdateProfileModal";
+import PostContainerProfile from "@/components/PostContainerProfile";
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import { db } from "@/firebase_config";
 
 const MyProfilePage = () => {
   const {userData} = useAuthContext();
   const [showModal, setShowModal] = useState(false);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const getMyPosts = async () => {
+        if(!userData?.username) return;
+        try {
+            const posts = await getDocs(query(collection(db, 'posts'), where('userName', '==', userData?.username))); //, orderBy('date', 'desc')
+            const tempArr = [];
+            posts.forEach(post => {
+                tempArr.push({
+                    postId: post.id,
+                    postData: post.data()
+                });
+                setPosts(tempArr);
+            });
+        } catch(err) {
+            console.log(err);
+        }
+    }
+    getMyPosts()
+  }, [userData?.username]);
 
   return (
     <main className='my-profile-page'>
@@ -25,9 +49,9 @@ const MyProfilePage = () => {
                 </div>
             </div>
             <h6 className='myprofile-subtitles'>My Posts</h6>
-            <ul>
-                POSTs CONTAINer
-            </ul>
+            <section style={{display:'flex', justifyContent:'center'}}>
+                <PostContainerProfile posts={posts}/>
+            </section>
         </section> : <div>loading...</div>}
         {showModal && <UpdateProfileModal toggleModal={() => setShowModal(false)} username={userData?.username} profileImg={userData?.userImg} userLocation={userData?.location} name={userData?.fullName} profileImgId={userData?.userImgId} userId={userData?.userId}/>}
     </main>

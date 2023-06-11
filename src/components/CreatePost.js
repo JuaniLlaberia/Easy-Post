@@ -13,7 +13,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { ClipLoader } from 'react-spinners'
 
 const CreatePost = () => {
-  const {currentAcc} = useAuthContext();
+  const {currentAcc, userData} = useAuthContext();
     const [postText, setPostText] = useState('');
     const [img, setImg] = useState(null);
     const [imgPreview, setImgPreview] = useState(null);
@@ -44,12 +44,11 @@ const CreatePost = () => {
         try {
             await addDoc(collectionPostsRef, {
                 createdBy: currentAcc?.uid,
-                // userPhotoURl: userData?.profileImg,
-                // userName: userData?.name,
+                userPhotoURl: userData?.userImg,
+                userName: userData?.username,
                 postBody: postText,
                 updated: false,
                 comments: [],
-                savedBy: [],
                 likedBy: [],
                 likesNum: 0,
                 date: serverTimestamp(),

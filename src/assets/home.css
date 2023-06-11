@@ -4,62 +4,6 @@
     box-sizing: border-box;
 }
 
-.my-profile-page {
-    display: flex;
-    justify-content: center;
-    padding-top: 60px;
-}
-
-.personal-info {
-    width: 60vw;
-}
-
-.personal-info img{
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.profile-top {
-    display: flex;
-    align-items: center;
-    gap: 50px;
-    margin-bottom: 25px;
-    margin-top: 25px;
-    position: relative;
-}
-
-.profile-user-info {
-    position: relative;
-}
-
-.profile-top h1 {
-    font-size: 2rem;
-    font-weight: 600;
-}
-
-.profile-top p{
-    font-size: 1rem;
-    color: rgba(0, 0, 0, 0.605);
-    font-weight: 400;
-}
-
-.profile-top button {
-    position: absolute;
-    top: 12.5%;
-    right: 10%;
-
-    background-color: transparent;
-    border: none;
-    font-size: 1.25rem;
-    cursor: pointer;
-}
-
-.myprofile-subtitles {
-    color: rgba(0, 0, 0, 0.575);
-    font-size: 1rem;
-    margin-top: 10px;
-}
-
 .home-page {
     display: flex;
     flex-direction: column;
@@ -439,4 +383,10 @@ form button:disabled {
 .delete-modal div button.remove {
     background-color: rgb(255, 54, 54);
     color: white;
+}
+
+.modal-edit-profile {
+    height: auto;
+    padding: 15px;
+    display: flex;
 }

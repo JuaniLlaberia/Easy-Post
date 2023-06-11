@@ -3,12 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Image from "next/image"
 import Link from "next/link"
 
-const PostItemFeed = ({body, img, likeNum,by, userName, userImg, id}) => {
+const PostItemFeed = ({body, img, likeNum, by, userName, userImg, id}) => {
     return (
     <li className='post-item-feed'>
         <Link href={`/home/profile/${by}`} className='link-to-profile'>
             <Image src={userImg} width={50} height={50} alt="user"/>
-            <h6>{userName}</h6>
+            <h6>@{userName}</h6>
             <p>06/12/2002</p>
         </Link>
         <Link href={`/home/post/${id}`} className='link-to-post'>
