@@ -1,6 +1,5 @@
 'use client'
 
-import { useUserDataContext } from "@/context/UserDataContext";
 import { db } from "@/firebase_config";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import Image from "next/image";
@@ -9,7 +8,6 @@ import { ClipLoader } from "react-spinners";
 import { v4 as uuid } from "uuid";
 
 const CreateComment = ({postId}) => {
-    const { userData } = useUserDataContext();
     const [commentBody, setCommentBody] = useState('');
     const [loadingBtn, setLoadingBtn] = useState(false);
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { db, storage } from '../firebase_config';
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useAuthContext } from "../context/AuthContext";
@@ -8,13 +8,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid';
 import { faImage } from "@fortawesome/free-regular-svg-icons";
-import { useUserDataContext } from "@/context/UserDataContext";
 import Image from "next/image";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { ClipLoader } from 'react-spinners'
 
 const CreatePost = () => {
-  const {userData} = useUserDataContext();
   const {currentAcc} = useAuthContext();
     const [postText, setPostText] = useState('');
     const [img, setImg] = useState(null);
@@ -46,8 +44,8 @@ const CreatePost = () => {
         try {
             await addDoc(collectionPostsRef, {
                 createdBy: currentAcc?.uid,
-                userPhotoURl: userData?.profileImg,
-                userName: userData?.name,
+                // userPhotoURl: userData?.profileImg,
+                // userName: userData?.name,
                 postBody: postText,
                 updated: false,
                 comments: [],
@@ -86,7 +84,8 @@ const CreatePost = () => {
                         setImgPreview(URL.createObjectURL(e.target.files[0]))
                         setImg(e.target.files[0])}}/>
                   </label>
-                  <button className="remove-img-btn" onClick={() => {
+                  <button className="remove-img-btn" onClick={e => {
+                    e.preventDefault()
                     setImg(null);
                     setImgPreview(null);
                   }}><FontAwesomeIcon icon={faTrash}/></button>

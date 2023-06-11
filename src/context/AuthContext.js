@@ -1,13 +1,15 @@
 'use client'
 
-import { auth } from "@/firebase_config";
+import { auth, db } from "@/firebase_config";
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from "firebase/auth";
+import { doc, getDoc} from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
     const [currentAcc, setCurrentAcc] = useState(null);
+    const [userData, setUserData] = useState(null);
 
     //Login to user/company account
     const loginAccount = (email, password) => {
@@ -29,9 +31,28 @@ export const AuthProvider = ({children}) => {
         return signOut(auth);
     }
 
+    //Fetch current user data
+    const fetchUserData = async (uid) => {
+        try {
+            const docRef = doc(db, 'users', uid);
+            const userData = await getDoc(docRef);
+
+            if(userData.exists) {
+                setUserData(userData.data());
+            } else {
+                console.log('User not found. Try Again!');
+            }
+        } catch(err) {
+            console.log(err);
+        }
+    };
+
     useEffect(() => {
         const unsuscribe = onAuthStateChanged(auth, user => {
-            setCurrentAcc(user);
+            if(user) {
+                setCurrentAcc(user);
+                fetchUserData(user.uid)
+            };
         });
         return () => unsuscribe;
     }, []);
@@ -43,7 +64,8 @@ export const AuthProvider = ({children}) => {
             loginAccount,
             createAccount,
             logout,
-            resetPassword
+            resetPassword,
+            userData
         }}>
             {children}
         </AuthContext.Provider>

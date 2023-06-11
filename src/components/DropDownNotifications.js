@@ -5,7 +5,7 @@ import '../assets/navbar.css'
 import { useAuthContext } from "@/context/AuthContext"
 import { useRouter } from "next/navigation"
 
-const DropDownBtn = () => {
+const DropDownNotifications = () => {
   const { logout } = useAuthContext();
   const router = useRouter();
 
@@ -16,7 +16,7 @@ const DropDownBtn = () => {
 
   return (
     <div className="dropdown">
-        <Link  href='/home/my-profile' className='main-btn-nav'>Porfile</Link>
+        <Link  href='/home/my-profile' className='main-btn-nav'>Notifications</Link>
             <div className="dropdown-content">
               <button onClick={handleLogOut} className='logout-btn-nav'>Log Out</button>
          </div>
@@ -24,4 +24,4 @@ const DropDownBtn = () => {
   )
 }
 
-export default DropDownBtn
+export default DropDownNotifications

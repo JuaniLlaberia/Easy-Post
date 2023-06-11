@@ -2,15 +2,16 @@
 
 import Image from "next/image";
 import '../../../assets/home.css'
-import { useUserDataContext } from "@/context/UserDataContext";
+import { useAuthContext } from "@/context/AuthContext";
 
 const MyProfilePage = () => {
-    const {userData} = useUserDataContext();
+  const {userData} = useAuthContext();
+
 
   return (
     <main className='my-profile-page'>
         <section className='personal-info'>
-            <div className='profile-top'>
+            {/* <div className='profile-top'>
                 <Image draggable={false} src={userData?.profileImg} width={180} height={180} alt='user'/>
                 <div>
                     <h1>{userData?.name} <span className='profile-state'>{userData?.state}</span></h1>
@@ -22,7 +23,7 @@ const MyProfilePage = () => {
             <button>Settings/edit profile</button>
             <ul>
                 POSTs CONTAINer
-            </ul>
+            </ul> */}
         </section>
     </main>
   )
