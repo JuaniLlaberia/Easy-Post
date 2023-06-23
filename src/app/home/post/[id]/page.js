@@ -8,15 +8,19 @@ import { useParams} from "next/navigation"
 import { useEffect, useState } from "react";
 import '../../../../assets/home.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBookmark, faHeart, faPenToSquare, faShareFromSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
+import { faBookmark, faHeart, faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as fullHeart} from "@fortawesome/free-solid-svg-icons";
 import { useAuthContext } from "@/context/AuthContext";
 import CreateComment from "@/components/CreateComment";
 import CommentsContainer from "@/components/CommentsContainer";
 import EditPost from "@/components/EditPost";
 import DeletePost from "@/components/DeletePost";
+import { formatDate } from "@/utils/formatDate";
+import { addLike } from "@/utils/addLike";
+import { unLike } from "@/utils/unLike";
 
 const PostPage = () => {
-  const {currentAcc} = useAuthContext();
+  const {currentAcc, userData} = useAuthContext();
   const { id } = useParams();
   const [post, setPost] = useState({});
   const docRef = doc(db, 'posts', id)
@@ -30,16 +34,18 @@ const PostPage = () => {
     return unsuscribe
   }, [id]);
 
+  const isLikedByUser = post?.likedBy?.some(user => user === userData?.username)
+
   return (
     <main className='post-page'>
       <div className='post-page-contaiener'>
         <div className='post-top-section'>
-            <Link href={`/home/profile/${post?.createdBy}`} style={{display:'flex', alignItems:'center', gap:'10px'}}>
+            <Link href={`/home/profile/${post?.userName}`} style={{display:'flex', alignItems:'center', gap:'10px'}}>
               {post?.userPhotoURl ? <Image draggable={false} src={post?.userPhotoURl} width={50} height={50} alt="user"/> : null}
               {post?.userName}
               {post?.updated && <span className='edited'>(edited)</span>}
             </Link>
-          <p>06/12/2002</p>
+          <p>{formatDate(post?.date?.seconds)}</p>
         </div>
         <p className='post-body'>{post?.postBody}</p>
         <div style={{display:'flex', justifyContent:'center', alignItems:'center', borderBottom:'1px solid rgba(255, 255, 255, 0.105)'}}>
@@ -47,9 +53,9 @@ const PostPage = () => {
         </div>
         {/* MORE MODULAR AND MORE COMPONENTS */}
         <div className='profile-post-btns'>
-          <button className="post-btn"><FontAwesomeIcon size="2x" icon={faHeart}/></button>
+          {currentAcc?.uid === post?.createdBy && <div style={{color:'white'}}>{post?.likesNum}</div>}
+          {isLikedByUser ? <button onClick={() => unLike(id, userData?.username)} className="post-btn"><FontAwesomeIcon size="2x" icon={fullHeart}/></button> : <button onClick={() => addLike(id, userData?.username)} className="post-btn"><FontAwesomeIcon size="2x" icon={faHeart}/></button>}
           <button className="post-btn"><FontAwesomeIcon size="2x" icon={faBookmark}/></button>
-          <button className="post-btn"><FontAwesomeIcon size="2x" icon={faShareFromSquare}/></button>
           {currentAcc?.uid === post?.createdBy ? <>
               <button className="post-btn" onClick={() => setModalOpen(true)}><FontAwesomeIcon size="2x" icon={faPenToSquare}/></button>
               <button className="post-btn" onClick={() => setModalOpenDelete(true)}><FontAwesomeIcon size="2x" icon={faTrashCan}/></button>
@@ -57,7 +63,7 @@ const PostPage = () => {
         </div>
         <CreateComment postId={id}/>
       </div>
-      <CommentsContainer commentList={post?.comments}/>
+      <CommentsContainer commentList={post?.comments} postId={id} crrUser={userData?.username}/>
       {modalOpen && <EditPost toggleModal={() => setModalOpen(false)} body={post?.postBody} docID={id}/>}
       {modalOpenDelete && <DeletePost toggleModal={() => setModalOpenDelete(false)} docID={id} photoPath={post?.imgPath}/>}
     </main>

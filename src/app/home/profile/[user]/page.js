@@ -1,17 +1,19 @@
 'use client'
 
 import { db } from "@/firebase_config";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { useParams } from "next/navigation"
 import { useEffect, useState } from "react";
 import '../../../../assets/profile.css'
+import '../../../../assets/home.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faPen, faUser } from "@fortawesome/free-solid-svg-icons";
-import PostContainer from "@/components/PostContainer";
 import Image from "next/image";
 import { useAuthContext } from "@/context/AuthContext";
 import UpdateProfileModal from "@/components/UpdateProfileModal";
 import PostContainerProfile from "@/components/PostContainerProfile";
+import { followUser } from "@/utils/follow";
+import { unFollowUser } from "@/utils/unFollow";
 
 const Profile = () => {
   const {user} = useParams();
@@ -39,7 +41,7 @@ const Profile = () => {
         if(!user) return;
         try {
           console.log(user);
-            const posts = await getDocs(query(collection(db, 'posts'), where('userName', '==', user))); //, orderBy('date', 'desc')
+            const posts = await getDocs(query(collection(db, 'posts'), where('userName', '==', user), orderBy('date', 'desc'))); //, orderBy('date', 'desc')
             const tempArr = [];
             posts.forEach(post => {
                 tempArr.push({
@@ -56,6 +58,7 @@ const Profile = () => {
     getMyPosts()
   }, []);
 
+  const beingFollow = userData?.following?.some(user => user === profileData?.userId);
 
   return (
     <main className='my-profile-page'>
@@ -64,6 +67,7 @@ const Profile = () => {
                 <Image draggable={false} src={profileData?.userImg} width={180} height={180} alt='user'/>
                 <div className='profile-user-info'>
                     <h1>{profileData?.username}</h1>
+                    {userData?.username === profileData?.username ? null : beingFollow ? <button onClick={() => unFollowUser(profileData?.userId, userData?.userId)}>Unfollow</button> : <button onClick={() => followUser(profileData?.userId, userData?.userId)}>Follow</button>}
                     {profileData?.fullName ? <p><FontAwesomeIcon icon={faUser}/> {profileData?.fullName}</p> : null}
                     {profileData?.location ? <p><FontAwesomeIcon icon={faLocationDot}/> {profileData?.location}</p> : null}
                     {userData?.username === profileData?.username ? <button onClick={() => setShowModal(true)}><FontAwesomeIcon icon={faPen}/></button> : null}

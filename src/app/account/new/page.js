@@ -66,6 +66,7 @@ const UserSignUpPage = () => {
         userImgId:'',
         fullName:'',
         location:'',
+        following:[],
       });
       //Redirect user to homepage
       router.push(`/home`);

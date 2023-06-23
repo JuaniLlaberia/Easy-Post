@@ -8,7 +8,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 60px;
+    padding-left: 100px;
+    background-color: rgb(28, 28, 31);
 }
 
 .create-post-container {
@@ -389,4 +390,18 @@ form button:disabled {
     height: auto;
     padding: 15px;
     display: flex;
+}
+
+.trending-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    padding-top: 80px;
+}
+
+.trending-page h1 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 15px;
 }

@@ -2,7 +2,7 @@
 
 import { auth, db } from "@/firebase_config";
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from "firebase/auth";
-import { doc, getDoc} from "firebase/firestore";
+import { doc, getDoc, onSnapshot} from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
@@ -35,13 +35,9 @@ export const AuthProvider = ({children}) => {
     const fetchUserData = async (uid) => {
         try {
             const docRef = doc(db, 'users', uid);
-            const userData = await getDoc(docRef);
-
-            if(userData.exists) {
-                setUserData(userData.data());
-            } else {
-                console.log('User not found. Try Again!');
-            }
+            onSnapshot(docRef, doc => {
+                setUserData(doc.data());
+            })
         } catch(err) {
             console.log(err);
         }

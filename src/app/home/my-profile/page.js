@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import '../../../assets/profile.css'
+import '../../../assets/home.css'
 import { useAuthContext } from "@/context/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faPen, faUser } from "@fortawesome/free-solid-svg-icons";
@@ -20,7 +21,7 @@ const MyProfilePage = () => {
     const getMyPosts = async () => {
         if(!userData?.username) return;
         try {
-            const posts = await getDocs(query(collection(db, 'posts'), where('userName', '==', userData?.username))); //, orderBy('date', 'desc')
+            const posts = await getDocs(query(collection(db, 'posts'), orderBy('date', 'desc'), where('userName', '==', userData?.username))); //, orderBy('date', 'desc')
             const tempArr = [];
             posts.forEach(post => {
                 tempArr.push({
