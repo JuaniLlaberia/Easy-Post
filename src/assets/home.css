@@ -399,14 +399,16 @@ form button:disabled {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
-    padding-top: 80px;
+    min-height: 100vh;
+    background-color: rgb(28, 28, 31);
 }
 
 .trending-page h1 {
-    font-size: 1.25rem;
+    margin-top: 15px;
+    font-size: 1.5rem;
     font-weight: 500;
     margin-bottom: 15px;
+    color: white;
 }
 
 .login-card {

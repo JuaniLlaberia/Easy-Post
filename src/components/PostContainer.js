@@ -1,7 +1,7 @@
 'use client'
 
 import { db } from "@/firebase_config"
-import { collection, limit, onSnapshot, orderBy, query } from "firebase/firestore"
+import { collection, limit, onSnapshot, orderBy, query, startAfter } from "firebase/firestore"
 import { useEffect, useState } from "react";
 import PostItemFeed from "./PostItemFeed";
 
@@ -9,7 +9,9 @@ const PostContainer = () => {
     const [posts, setPosts] = useState([]);
 
     const collectionRef = collection(db, 'posts');
-    const firstQuery = query(collectionRef, orderBy('date', 'desc'), limit(5));
+    const firstQuery = query(collectionRef, orderBy('date', 'desc'), limit(10));
+    
+    // const nextQuery = firstQuery.startAfter()
 
     useEffect(() => {
         const suscribe = onSnapshot(firstQuery, snapshot => {
@@ -33,7 +35,6 @@ const PostContainer = () => {
   return (
     <ul>
       {renderPosts}
-      {/* <button>More posts</button> */}
     </ul>
   )
 }

@@ -6,10 +6,12 @@ import InboxItem from "@/components/InboxItem";
 import { useEffect, useState } from "react";
 import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { db } from "@/firebase_config";
+import { ClipLoader } from "react-spinners";
 
 const page = () => {
     const {userData} = useAuthContext();
     const [notifications, setNotifications] = useState([]);
+    const [loadingBtn, setLoadingBtn] = useState(true);
 
     useEffect(() => {
         if (!userData) return;
@@ -23,7 +25,8 @@ const page = () => {
                 })
             });
             console.log(tempArr);
-            setNotifications(tempArr)
+            setNotifications(tempArr);
+            setLoadingBtn(false);
         })
         return unsuscribe
     }, [userData]);
@@ -39,7 +42,8 @@ const page = () => {
             <p>All your notifications are here</p>
         </div>
         <ul className='inbox-container'>
-            {notifications?.length < 1 ? <div>No notifications</div> : renderInbox}
+            {loadingBtn && <div className='inbox-container-msg'><ClipLoader color="#e981f7" size='50px'/></div>}
+            {notifications?.length < 1 && !loadingBtn ? <div className='inbox-container-msg text'>No notifications</div> : renderInbox}
         </ul>
     </main>
   )

@@ -72,6 +72,17 @@
     cursor: pointer;
 }
 
+.inbox-container-msg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+}
+
+.inbox-container-msg.text {
+    color: rgba(255, 255, 255, 0.697);
+}
+
 @media (max-width:600px) {
     .inbox-header {
         width: 70vw;
