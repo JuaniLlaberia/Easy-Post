@@ -43,10 +43,12 @@ const MyProfilePage = () => {
             <div className='profile-top'>
                 <Image draggable={false} src={userData?.userImg} width={180} height={180} alt='user'/>
                 <div className='profile-user-info'>
-                    <h1>{userData?.username}</h1>
+                    <div style={{display:'flex', alignItems:'center' ,gap:'20px'}}>
+                        <h1>{userData?.username}</h1>
+                        <button className='edit-btn' onClick={() => setShowModal(true)}><FontAwesomeIcon icon={faPen}/></button>
+                    </div>
                     {userData?.fullName ? <p><FontAwesomeIcon icon={faUser}/> {userData?.fullName}</p> : null}
                     {userData?.location ? <p><FontAwesomeIcon icon={faLocationDot}/> {userData?.location}</p> : null}
-                    <button onClick={() => setShowModal(true)}><FontAwesomeIcon icon={faPen}/></button>
                 </div>
             </div>
             <h6 className='myprofile-subtitles'>My Posts</h6>

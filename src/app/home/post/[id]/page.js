@@ -54,7 +54,7 @@ const PostPage = () => {
         {/* MORE MODULAR AND MORE COMPONENTS */}
         <div className='profile-post-btns'>
           {currentAcc?.uid === post?.createdBy && <div style={{color:'white'}}>{post?.likesNum}</div>}
-          {isLikedByUser ? <button onClick={() => unLike(id, userData?.username)} className="post-btn"><FontAwesomeIcon size="2x" icon={fullHeart}/></button> : <button onClick={() => addLike(id, userData?.username)} className="post-btn"><FontAwesomeIcon size="2x" icon={faHeart}/></button>}
+          {isLikedByUser ? <button onClick={() => unLike(id, userData?.username)} className="post-btn"><FontAwesomeIcon size="2x" icon={fullHeart}/></button> : <button onClick={() => addLike(id, userData?.username, post?.userName)} className="post-btn"><FontAwesomeIcon size="2x" icon={faHeart}/></button>}
           <button className="post-btn"><FontAwesomeIcon size="2x" icon={faBookmark}/></button>
           {currentAcc?.uid === post?.createdBy ? <>
               <button className="post-btn" onClick={() => setModalOpen(true)}><FontAwesomeIcon size="2x" icon={faPenToSquare}/></button>

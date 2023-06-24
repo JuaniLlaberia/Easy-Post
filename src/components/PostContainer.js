@@ -33,7 +33,7 @@ const PostContainer = () => {
   return (
     <ul>
       {renderPosts}
-      <button>More posts</button>
+      {/* <button>More posts</button> */}
     </ul>
   )
 }

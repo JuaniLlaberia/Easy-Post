@@ -7,11 +7,17 @@
 .my-profile-page {
     display: flex;
     justify-content: center;
+    background-color: rgb(28, 28, 31);
+    min-height: 100vh;
     padding-top: 60px;
 }
 
 .personal-info {
     width: 60vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
 }
 
 .personal-info img{
@@ -22,6 +28,7 @@
 .profile-top {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 50px;
     margin-bottom: 25px;
     margin-top: 25px;
@@ -37,29 +44,44 @@
 .profile-top h1 {
     font-size: 2rem;
     font-weight: 600;
+    color: white;
 }
 
 .profile-top p{
     font-size: 1rem;
-    color: rgba(0, 0, 0, 0.605);
+    color: rgba(255, 255, 255, 0.645);
     font-weight: 400;
 }
 
-.profile-top button {
-    position: absolute;
-    top: 15%;
-    right: -15%;
-
+.edit-btn {
     background-color: transparent;
     border: none;
     font-size: 1.25rem;
     cursor: pointer;
+    color: white;
+}
+
+.follow-btn {
+    background-color: rgb(229, 83, 248);
+    color: white;
+    padding: 5px 15px;
+    height: 30px;
+    width: auto;
+    min-width: 100px;
+    border-radius: 4px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.follow-btn.unfollow {
+    background-color: rgb(255, 255, 255);
+    color: black;
 }
 
 .myprofile-subtitles {
-    color: rgba(0, 0, 0, 0.575);
+    color: rgba(255, 255, 255, 0.575);
     font-size: 1rem;
-    margin-top: 10px;
 }
 
 .modal-edit-profile {
@@ -67,10 +89,10 @@
     left: 50%;
     top: 40%;
     transform: translate(-50%, -40%);
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(26, 23, 23);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgb(45, 44, 44);
+    box-shadow: 0 2px 5px rgb(75, 74, 74);
     width: 80vw;
     max-width: 700px;
     z-index: 1;
@@ -85,8 +107,8 @@
     gap: 10px;
 }
 
-.info-left p {
-    color: black;
+.info-left p, .info-right p {
+    color: rgb(255, 255, 255);
 }
 
 .info-left img {
@@ -99,10 +121,6 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
-}
-
-.info-right p {
-    color: black;
 }
 
 .modal-edit-profile button{

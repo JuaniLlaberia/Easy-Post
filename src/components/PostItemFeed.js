@@ -2,7 +2,7 @@ import { formatDate } from "@/utils/formatDate"
 import Image from "next/image"
 import Link from "next/link"
 
-const PostItemFeed = ({body, date,img, by, userName, userImg, id}) => {
+const PostItemFeed = ({body, date,img, userName, userImg, id}) => {
     return (
     <li className='post-item-feed'>
         <Link href={`/home/profile/${userName}`} className='link-to-profile'>

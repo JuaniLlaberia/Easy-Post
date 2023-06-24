@@ -1,0 +1,38 @@
+.inbox-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background-color: rebeccapurple;
+}
+
+.inbox-container {
+    background-color: aliceblue;
+    width: 50vw;
+    padding: 5px;
+    margin-top: 25px;
+    height: 75vh;
+    border-radius: 8px;
+    overflow-y: scroll;
+}
+
+.inbox-item {
+    background-color: rgb(83, 76, 76);
+    border-radius: 8px;
+    padding: 5px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 7.5px;
+}
+
+.notification-msg {
+    color: white;
+    text-decoration: none;
+}
+
+.notification-btns {
+    display: flex;
+    gap: 10px;
+}

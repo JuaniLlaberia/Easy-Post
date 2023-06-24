@@ -1,12 +1,20 @@
 import { db } from "@/firebase_config";
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { addDoc, arrayUnion, collection, doc, serverTimestamp, updateDoc } from "firebase/firestore";
+import { v4 as uuid } from "uuid";
 
-export const followUser = async (userToFollow, myUser) => {
-        const userRef = doc(db, 'users', myUser);
+export const followUser = async (userToFollowId, userToFollow, myUser, myUsername) => {
+        const userRefSender = doc(db, 'users', myUser);
 
         try {
-            await updateDoc(userRef, {
-                'following': arrayUnion(userToFollow),
+            await updateDoc(userRefSender, {
+                'following': arrayUnion(userToFollowId),
+            });
+            await addDoc(collection(db, 'notifications'), {
+                msg:`@${myUsername} started following you.`,
+                time: serverTimestamp(),
+                id: uuid(),
+                sender: myUsername,
+                receiver: userToFollow,
             })
         } catch(err) {
             console.log(err);

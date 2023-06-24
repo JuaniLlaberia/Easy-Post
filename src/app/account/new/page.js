@@ -67,6 +67,7 @@ const UserSignUpPage = () => {
         fullName:'',
         location:'',
         following:[],
+        inbox:[],
       });
       //Redirect user to homepage
       router.push(`/home`);
@@ -91,10 +92,10 @@ const UserSignUpPage = () => {
           </div>
           <div className='btns-container'>
             <button disabled={loadingBtn} className='create-acc-button'>{loadingBtn ? <ClipLoader color="#e981f7" size='20px'/> : 'Create Account'}</button>
-            <Link href='/account' className='login-already'>Already register?</Link>
+            <Link href='/account/login' className='login-already'>Already register?</Link>
           </div>
         </form>
-        <Link href='/' className='go-back'><FontAwesomeIcon icon={faArrowLeftLong}/> Go back</Link>
+        {/* <Link href='/' className='go-back'><FontAwesomeIcon icon={faArrowLeftLong}/> Go back</Link> */}
     </main>
   )
 }

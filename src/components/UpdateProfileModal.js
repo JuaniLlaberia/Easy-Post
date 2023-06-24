@@ -9,6 +9,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { doc, updateDoc } from "firebase/firestore";
 import '../assets/account.css'
 import '../assets/profile.css'
+import { ClipLoader } from "react-spinners";
+import { useAuthContext } from "@/context/AuthContext";
 
 const UpdateProfileModal = ({toggleModal, username, profileImg, profileImgId, name, userLocation, userId}) => {
     const [newProfileImg, setNewProfileImg] = useState(profileImg);
@@ -16,6 +18,7 @@ const UpdateProfileModal = ({toggleModal, username, profileImg, profileImgId, na
     const [fullName, setFullName] = useState(name);
     const [location, setLocation] = useState(userLocation);
     const [loadingBtn, setLoadingBtn] = useState(false);
+    const {userData} = useAuthContext();
 
     const handleUpdateProfile = async e => {
         e.preventDefault();
@@ -35,7 +38,7 @@ const UpdateProfileModal = ({toggleModal, username, profileImg, profileImgId, na
             //Upload new image
             if(profileImg !== newProfileImg) {
                 newImgId = uuidv4();
-                const imgRef = ref(storage, `${newImgId}.${newProfileImg?.type?.split('/')[1]}`);
+                const imgRef = ref(storage, `${userData?.userId}/userImage.${newProfileImg?.type?.split('/')[1]}`);
                 await uploadBytes(imgRef, newProfileImg);
                 newImgPath = await getDownloadURL(imgRef);
             };
@@ -73,11 +76,11 @@ const UpdateProfileModal = ({toggleModal, username, profileImg, profileImgId, na
         </section>
         <section className='info-right'>
             <p>User Information</p>
-            <CustomInput classInput='input-form' classLabel='floating-label' value={username} id='username' required={false} readonly={true} type='text' label='Username'/>
-            <CustomInput classInput='input-form' classLabel='floating-label' value={fullName} required={false} readonly={false} id='fullname' type='text' label='Full Name' onChange={e => setFullName(e.target.value)} max={50}/>
-            <CustomInput classInput='input-form' classLabel='floating-label' value={location} id='location' required={false} readonly={false} type='text' onChange={e => setLocation(e.target.value)} label='Location' max={100}/>
+            <CustomInput classInput='input-form' textColor='white' bg='rgb(26, 23, 23)' classLabel='floating-label' value={username} id='username' required={false} readonly={true} type='text' label='Username'/>
+            <CustomInput classInput='input-form' textColor='white' bg='rgb(26, 23, 23)' classLabel='floating-label' value={fullName} required={false} readonly={false} id='fullname' type='text' label='Full Name' onChange={e => setFullName(e.target.value)} max={50}/>
+            <CustomInput classInput='input-form' textColor='white' bg='rgb(26, 23, 23)' classLabel='floating-label' value={location} id='location' required={false} readonly={false} type='text' onChange={e => setLocation(e.target.value)} label='Location' max={100}/>
         </section>
-        <button onClick={handleUpdateProfile}>{loadingBtn ? 'Saving...' : 'Save'}</button>
+        <button onClick={handleUpdateProfile}>{loadingBtn ? <ClipLoader color="#e981f7" size='15px'/> : 'Save'}</button>
     </form>
     <div className="overlay" onClick={toggleModal}></div>
     </>

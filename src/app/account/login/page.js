@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
-import '../../assets/account.css';
+import '../../../assets/account.css';
 import CustomInput from "@/components/CustomInput";
 import { ClipLoader } from 'react-spinners';
 
@@ -46,7 +46,7 @@ const LoginPage = () => {
           <Link href='/account/reset-password'>Forgot password?</Link>
         </div>
       </form>
-      <Link href='/' className='go-back'><FontAwesomeIcon icon={faArrowLeftLong}/> Go back</Link>
+      {/* <Link href='/' className='go-back'><FontAwesomeIcon icon={faArrowLeftLong}/> Go back</Link> */}
     </main>
   )
 }
