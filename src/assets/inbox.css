@@ -3,36 +3,99 @@
     flex-direction: column;
     align-items: center;
     height: 100vh;
-    background-color: rebeccapurple;
+    background-color: rgb(28, 28, 31);
+}
+
+.inbox-header {
+    width: 50vw;
+    margin-top: 10px;
+}
+
+.inbox-header h1{
+    color: white;
+}
+
+.inbox-header p{
+    color: rgba(255, 255, 255, 0.682);
 }
 
 .inbox-container {
-    background-color: aliceblue;
+    background-color: #353638;
     width: 50vw;
-    padding: 5px;
+    min-width: 250px;
     margin-top: 25px;
     height: 75vh;
-    border-radius: 8px;
+    border-radius: 4px;
     overflow-y: scroll;
+    border: 1px solid rgba(225, 225, 225, 0.321);
 }
 
+.inbox-container::-webkit-scrollbar {
+    display: none;
+  }
+
 .inbox-item {
-    background-color: rgb(83, 76, 76);
-    border-radius: 8px;
+    background-color: rgb(36, 33, 33);
+    border-radius: 4px;
     padding: 5px;
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 7.5px;
+    border-bottom: 1px solid rgba(225, 225, 225, 0.321);
 }
 
 .notification-msg {
     color: white;
+}
+
+.notification-msg a {
+    color: rgb(229, 83, 248);
     text-decoration: none;
 }
 
 .notification-btns {
     display: flex;
+    align-items: center;
     gap: 10px;
+}
+
+.notification-btns p {
+    color: rgba(255, 255, 255, 0.682);
+}
+
+.notification-btns button {
+    color: rgba(255, 255, 255, 0.682);
+    background-color: transparent;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+@media (max-width:600px) {
+    .inbox-header {
+        width: 70vw;
+    }
+
+    .inbox-header p{
+        font-size: .8rem;
+    }
+
+    .inbox-item {
+        padding: 7.5px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .notification-msg {
+        font-size: .8rem;
+    }
+
+    .notification-btns {
+        width: 40vw;
+        min-width: 225px;
+        justify-content: flex-end;
+    }
 }

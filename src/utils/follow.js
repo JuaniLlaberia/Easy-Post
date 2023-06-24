@@ -10,7 +10,7 @@ export const followUser = async (userToFollowId, userToFollow, myUser, myUsernam
                 'following': arrayUnion(userToFollowId),
             });
             await addDoc(collection(db, 'notifications'), {
-                msg:`@${myUsername} started following you.`,
+                msg:'started following you.',
                 time: serverTimestamp(),
                 id: uuid(),
                 sender: myUsername,

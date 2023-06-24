@@ -9,7 +9,7 @@ import { db } from "@/firebase_config";
 
 const page = () => {
     const {userData} = useAuthContext();
-    const [notifications, setNotifications] = useState();
+    const [notifications, setNotifications] = useState([]);
 
     useEffect(() => {
         if (!userData) return;
@@ -29,13 +29,13 @@ const page = () => {
     }, [userData]);
 
     const renderInbox = notifications?.map(msg => {
-        return <InboxItem  key={msg.notificationId} msg={msg.notificationInfo.msg} username={msg.notificationInfo.sender}/>
+        return <InboxItem  key={msg.notificationId} inboxId={msg.notificationId} postId={msg.notificationInfo.postId} msg={msg.notificationInfo.msg} username={msg.notificationInfo.sender} time={msg.notificationInfo.time}/>
     })
 
   return (
     <main className='inbox-page'>
-        <div>
-            <h1>Inbox</h1>
+        <div className='inbox-header'>
+            <h1>Inbox ({notifications?.length})</h1>
             <p>All your notifications are here</p>
         </div>
         <ul className='inbox-container'>

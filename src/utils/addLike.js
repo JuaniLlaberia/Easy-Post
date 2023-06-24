@@ -11,11 +11,12 @@ export const addLike = async (postId, senderUser, receiverUser) => {
                 'likesNum': increment(1),
             });
             await addDoc(collection(db, 'notifications'), {
-                msg:`@${senderUser} liked your post.`,
+                msg:'liked your post.',
                 time: serverTimestamp(),
                 id: uuid(),
                 sender: senderUser,
                 receiver: receiverUser,
+                postId:postId
             })
         } catch(err) {
             console.log(err);
