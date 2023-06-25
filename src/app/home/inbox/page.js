@@ -7,11 +7,13 @@ import { useEffect, useState } from "react";
 import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { db } from "@/firebase_config";
 import { ClipLoader } from "react-spinners";
+import { useTheme } from "@/context/ThemeContext";
 
 const page = () => {
     const {userData} = useAuthContext();
     const [notifications, setNotifications] = useState([]);
     const [loadingBtn, setLoadingBtn] = useState(true);
+    const {theme} = useTheme();
 
     useEffect(() => {
         if (!userData) return;
@@ -36,7 +38,7 @@ const page = () => {
     })
 
   return (
-    <main className='inbox-page'>
+    <main className={`inbox-page ${theme === 'light' ? 'light' : ''}`}>
         <div className='inbox-header'>
             <h1>Inbox ({notifications?.length})</h1>
             <p>All your notifications are here</p>

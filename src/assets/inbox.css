@@ -4,6 +4,29 @@
     align-items: center;
     height: 100vh;
     background-color: rgb(28, 28, 31);
+
+    --main-bg-color: rgb(28, 28, 31);
+    --second-bg-color: #353638;
+    --third-bg-color: rgb(36, 33, 33);
+    --main-text-color: white;
+    --second-text-color: rgba(255, 255, 255, 0.682);
+    --border-color: rgba(225, 225, 225, 0.321);
+
+}
+
+.inbox-page.light {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background-color: rgb(250, 250, 250);
+
+    --main-bg-color: rgb(250, 250, 250);
+    --second-bg-color: #d7d7d7;
+    --third-bg-color: #e9e9eb;
+    --main-text-color: rgb(0, 0, 0);
+    --second-text-color: rgba(0, 0, 0, 0.682);
+    --border-color: rgba(0, 0, 0, 0.321);
 }
 
 .inbox-header {
@@ -12,22 +35,22 @@
 }
 
 .inbox-header h1{
-    color: white;
+    color: var(--main-text-color);
 }
 
 .inbox-header p{
-    color: rgba(255, 255, 255, 0.682);
+    color: var(--second-text-color);
 }
 
 .inbox-container {
-    background-color: #353638;
+    background-color: var(--second-bg-color);
     width: 50vw;
     min-width: 250px;
     margin-top: 25px;
     height: 75vh;
     border-radius: 4px;
     overflow-y: scroll;
-    border: 1px solid rgba(225, 225, 225, 0.321);
+    border: 1px solid var(--border-color);
 }
 
 .inbox-container::-webkit-scrollbar {
@@ -35,18 +58,18 @@
   }
 
 .inbox-item {
-    background-color: rgb(36, 33, 33);
+    background-color: var(--third-bg-color);
     border-radius: 4px;
     padding: 5px;
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid rgba(225, 225, 225, 0.321);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .notification-msg {
-    color: white;
+    color: var(--main-text-color);
 }
 
 .notification-msg a {
@@ -61,11 +84,11 @@
 }
 
 .notification-btns p {
-    color: rgba(255, 255, 255, 0.682);
+    color: var(--second-text-color);
 }
 
 .notification-btns button {
-    color: rgba(255, 255, 255, 0.682);
+    color: var(--second-text-color);
     background-color: transparent;
     border: none;
     font-size: 1.1rem;
@@ -80,7 +103,7 @@
 }
 
 .inbox-container-msg.text {
-    color: rgba(255, 255, 255, 0.697);
+    color: var(--second-text-color);
 }
 
 @media (max-width:600px) {

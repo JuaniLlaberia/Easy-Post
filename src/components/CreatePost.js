@@ -10,7 +10,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { faImage } from "@fortawesome/free-regular-svg-icons";
 import Image from "next/image";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { ClipLoader } from 'react-spinners'
+import { ClipLoader } from 'react-spinners';
+import '../assets/new-post.css';
+import { useTheme } from "@/context/ThemeContext";
 
 const CreatePost = () => {
   const {currentAcc, userData} = useAuthContext();
@@ -18,6 +20,7 @@ const CreatePost = () => {
     const [img, setImg] = useState(null);
     const [imgPreview, setImgPreview] = useState(null);
     const [loadingBtn, setLoadingBtn] = useState(false);
+    const {theme} = useTheme();
     const collectionPostsRef = collection(db, 'posts');
 
     const handleCreatePost = async e => {
@@ -70,7 +73,7 @@ const CreatePost = () => {
 
   return (
     <>
-        <div className='create-post-container'>
+        <div className={`create-post-container ${theme === 'light' ? 'light' : ''}`}>
             <h3>Create new post</h3>
             <form onSubmit={handleCreatePost}>
                 <textarea value={postText} placeholder='Write your post here' onChange={e => setPostText(e.target.value)} maxLength={300}/>

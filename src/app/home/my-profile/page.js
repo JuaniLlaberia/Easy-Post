@@ -11,11 +11,13 @@ import UpdateProfileModal from "@/components/UpdateProfileModal";
 import PostContainerProfile from "@/components/PostContainerProfile";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { db } from "@/firebase_config";
+import { useTheme } from "@/context/ThemeContext";
 
 const MyProfilePage = () => {
   const {userData} = useAuthContext();
   const [showModal, setShowModal] = useState(false);
   const [posts, setPosts] = useState([]);
+  const {theme} = useTheme();
 
   useEffect(() => {
     const getMyPosts = async () => {
@@ -38,7 +40,7 @@ const MyProfilePage = () => {
   }, [userData?.username]);
 
   return (
-    <main className='my-profile-page'>
+    <main className={`my-profile-page ${theme === 'light' ? 'light' : ''}`}>
         {userData !== null ? <section className='personal-info'>
             <div className='profile-top'>
                 <Image draggable={false} src={userData?.userImg} width={180} height={180} alt='user'/>

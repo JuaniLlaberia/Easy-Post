@@ -3,17 +3,19 @@
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import '../../../assets/search.css'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { collection, getDocs, query, where } from "firebase/firestore"
 import { db } from "@/firebase_config"
 import UserItem from "@/components/userItem"
 import { ClipLoader } from "react-spinners"
+import { useTheme } from "@/context/ThemeContext"
 
 
 const SearchPage = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
+    const {theme} = useTheme();
 
     const handleSearch = async e => {
         e.preventDefault();
@@ -27,6 +29,7 @@ const SearchPage = () => {
                 tempArr.push(item.data())
             })
             setResults(tempArr)
+            console.log(tempArr);
             setLoading(false);
         } catch(err) {
             console.log(err);
@@ -34,12 +37,37 @@ const SearchPage = () => {
         }
     };
 
+        // useEffect(() => {
+
+        //   const test = async () => {
+        //     if(searchQuery.length < 1) return;
+        //     setLoading(true);
+        //     try {
+        //         const dta = await getDocs(query(collection(db, 'users'), where('username', '>=', searchQuery), where('username', '<=', searchQuery + '\uf8ff')));
+        //         const tempArr = [];
+        //         dta.forEach(item => {
+        //             tempArr.push(item.data())
+        //         })
+        //         setResults(tempArr)
+        //         setLoading(false);
+        //     } catch(err) {
+        //         console.log(err);
+        //         setLoading(false);
+        //     }
+        //   }
+
+        //   test();
+        // }, [searchQuery])
+
+    
+
     const usersToRender = results?.map(user => {
+      console.log(user);
         return <UserItem key={user.userId} userImg={user.userImg} username={user.username}/>
     })
 
   return (
-    <main className="search-page">
+    <main className={`search-page ${theme === 'light' ? 'light' : ''}`}>
       <form className='searchbar'>
         <div style={{position:'relative'}}>
             <label><FontAwesomeIcon icon={faMagnifyingGlass}/></label>
@@ -49,7 +77,7 @@ const SearchPage = () => {
       </form>
       <section>
         <ul className="results-container">
-            {loading ? <ClipLoader color="#e981f7" size='50px'/> : results.length > 1 && usersToRender}
+            {loading ? <ClipLoader color="#e981f7" size='50px'/> : results.length >= 1 && usersToRender}
         </ul>
       </section>
     </main>

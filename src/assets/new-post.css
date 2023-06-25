@@ -1,0 +1,126 @@
+.create-post-container {
+    padding: 15px;
+    width: 70vw;
+    margin: 20px;
+    border-radius: 8px;
+    position: relative;
+    padding-bottom: 50px;
+    box-shadow: 0 4px 8px black;
+    min-width: 300px;
+    max-width: 600px;
+    background-color: #353638;;
+
+    --main-bg-color: rgb(28, 28, 31);
+    --second-bg-color: #353638;
+    --third-bg-color: rgb(36, 33, 33);
+    --main-text-color: white;
+    --second-text-color: rgba(255, 255, 255, 0.682);
+    --border-color: rgba(255, 255, 255, 0.018);
+}
+
+.create-post-container.light {
+    padding: 15px;
+    width: 70vw;
+    margin: 20px;
+    border-radius: 8px;
+    position: relative;
+    padding-bottom: 50px;
+    box-shadow: 0 4px 8px black;
+    min-width: 300px;
+    max-width: 600px;
+    background-color: #d7d7d7;
+
+    --main-bg-color: rgb(250, 250, 250);
+    --second-bg-color: #d7d7d7;
+    --third-bg-color: #e9e9eb;
+    --main-text-color: rgb(0, 0, 0);
+    --second-text-color: rgba(0, 0, 0, 0.682);
+    --border-color: rgba(0, 0, 0, 0.11);
+}
+
+.create-post-container h3 {
+    color: var(--main-text-color);
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+form textarea {
+    font-size: 1rem;
+    resize: none;
+    width: 65vw;
+    height: 12vh;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 10px;
+    background-color: transparent;
+    color: var(--main-text-color);
+    min-width: 280px;
+    max-width: 570px;
+    outline: none;
+    border: 1px solid var(--border-color);
+}
+
+form textarea::placeholder {
+    color: var(--second-text-color);
+}
+
+form p {
+    color: var(--second-text-color);
+}
+
+form button.post{
+    font-size: 1.15rem;
+    font-weight: 600;
+    width: 7vw;
+    min-width: 80px;
+    padding: 5px;
+    border: none;
+    border-radius: 8px;
+    background-color: rgb(229, 83, 248);
+    color: white;
+    margin: 2.5px;
+    transition: all .3s ease;
+    position: absolute;
+    right: 5%;
+    bottom: 5%;
+}
+
+form button:hover {
+    background-color: rgb(216, 65, 236);
+    transform: translateY(4%);
+    cursor: pointer;
+}
+
+form button:disabled {
+    filter: brightness(0.9);
+    cursor: not-allowed;
+}
+
+.img-input, .remove-img-btn {
+    color: var(--second-text-color);
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: all .3s ease;
+}
+
+.remove-img-btn {
+    background-color: transparent;
+    border: none;
+}
+
+.remove-img-btn:hover, .img-input:hover {
+    background-color: transparent;
+    transform: translateY(3%);
+}
+
+.img-preview {
+    width: auto;
+    max-width: 66vw;
+    min-width: 50px;
+    height: auto;
+    max-height: 400px;
+    min-height: 50px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+}

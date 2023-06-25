@@ -1,4 +1,5 @@
 import { AuthProvider } from '@/context/AuthContext'
+import { ThemeProvider } from '@/context/ThemeContext';
 import { Poppins } from 'next/font/google';
 
 export const metadata = {
@@ -18,7 +19,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={poppins.className}>
         <AuthProvider>
+          <ThemeProvider>
             {children}
+          </ThemeProvider>
         </AuthProvider>
       </body>
     </html>

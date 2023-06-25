@@ -34,7 +34,7 @@ const CommentItem = ({commentBody, userImg, userName, postId, commentId, crrUser
         <div>
             <Image src={userImg} draggable={false} width={50} height={50} alt="user"/>
             <h6>@{userName}</h6>
-            {userName === crrUser ? <button onClick={handleCommentRemoval}><FontAwesomeIcon icon={faTrashCan}/></button> : null}
+            {userName === crrUser ? <button className='delete-comment-btn' onClick={handleCommentRemoval}><FontAwesomeIcon icon={faTrashCan}/></button> : null}
         </div>
         <p>{commentBody}</p>
     </li>

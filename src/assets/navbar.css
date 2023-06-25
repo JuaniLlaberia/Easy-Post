@@ -54,6 +54,10 @@ nav {
     align-items: center;
     justify-content: center;
     gap: 2.5px;
+    text-decoration: none;
+    font-size: .9rem;
+    color: black;
+    cursor: pointer;
 }
 
 .toggle-nav {

@@ -1,5 +1,5 @@
 import TrendingContainer from "@/components/TrendingContainer"
-import '../../../assets/home.css'
+import '../../../assets/trending.css'
 
 const TrendingPage = () => {
   return (

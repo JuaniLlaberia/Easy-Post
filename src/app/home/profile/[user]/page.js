@@ -14,6 +14,7 @@ import UpdateProfileModal from "@/components/UpdateProfileModal";
 import PostContainerProfile from "@/components/PostContainerProfile";
 import { followUser } from "@/utils/follow";
 import { unFollowUser } from "@/utils/unFollow";
+import { useTheme } from "@/context/ThemeContext";
 
 const Profile = () => {
   const {user} = useParams();
@@ -21,6 +22,7 @@ const Profile = () => {
   const {userData} = useAuthContext();
   const [showModal, setShowModal] = useState(false);
   const [posts, setPosts] = useState([]);
+  const {theme} = useTheme();
 
   //Getting profile data
   useEffect(() => {
@@ -61,7 +63,7 @@ const Profile = () => {
   const beingFollow = userData?.following?.some(user => user === profileData?.userId);
 
   return (
-    <main className='my-profile-page'>
+    <main className={`my-profile-page ${theme === 'light' ? 'light' : ''}`}>
       {profileData !== null ? <section className='personal-info'>
             <div className='profile-top'>
                 <Image draggable={false} src={profileData?.userImg} width={180} height={180} alt='user'/>

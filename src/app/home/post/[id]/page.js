@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams} from "next/navigation"
 import { useEffect, useState } from "react";
-import '../../../../assets/home.css'
+import '../../../../assets/post.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark, faHeart, faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as fullHeart} from "@fortawesome/free-solid-svg-icons";
@@ -18,6 +18,7 @@ import DeletePost from "@/components/DeletePost";
 import { formatDate } from "@/utils/formatDate";
 import { addLike } from "@/utils/addLike";
 import { unLike } from "@/utils/unLike";
+import { useTheme } from "@/context/ThemeContext";
 
 const PostPage = () => {
   const {currentAcc, userData} = useAuthContext();
@@ -26,6 +27,7 @@ const PostPage = () => {
   const docRef = doc(db, 'posts', id)
   const [modalOpen, setModalOpen] = useState(false);
   const [modalOpenDelete, setModalOpenDelete] = useState(false);
+  const {theme} = useTheme();
 
   useEffect(() => {
     const unsuscribe = onSnapshot(docRef, snapshot => {
@@ -37,7 +39,7 @@ const PostPage = () => {
   const isLikedByUser = post?.likedBy?.some(user => user === userData?.username)
 
   return (
-    <main className='post-page'>
+    <main className={`post-page ${theme === 'light' ? 'light' : ''}`}>
       <div className='post-page-contaiener'>
         <div className='post-top-section'>
             <Link href={`/home/profile/${post?.userName}`} style={{display:'flex', alignItems:'center', gap:'10px'}}>
