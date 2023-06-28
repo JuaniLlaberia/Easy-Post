@@ -1,10 +1,23 @@
+'use client'
+
 import { db } from "@/firebase_config";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import Image from "next/image"
+import { useState } from "react";
 
-const CommentItem = ({commentBody, userImg, userName, postId, commentId, crrUser}) => {
+const CommentItem = ({commentBody, userName, postId, commentId, crrUser, imgUserRef}) => {
+
+  const [userImg, setUserImg] = useState('');
+
+  const getUserImg = async () => {
+    const photo = await getDoc(imgUserRef)
+    // console.log(photo.data().userImg);
+    setUserImg(photo.data().userImg)
+  };
+
+  getUserImg()
 
   const handleCommentRemoval = async () => {
     const postRef = doc(db, 'posts', postId);
@@ -32,7 +45,7 @@ const CommentItem = ({commentBody, userImg, userName, postId, commentId, crrUser
   return (
     <li className='comment-item'>
         <div>
-            <Image src={userImg} draggable={false} width={50} height={50} alt="user"/>
+            {userImg ? <Image src={userImg} draggable={false} width={50} height={50} alt="user"/> : null}
             <h6>@{userName}</h6>
             {userName === crrUser ? <button className='delete-comment-btn' onClick={handleCommentRemoval}><FontAwesomeIcon icon={faTrashCan}/></button> : null}
         </div>

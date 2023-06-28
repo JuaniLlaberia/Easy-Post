@@ -24,6 +24,7 @@ const CreateComment = ({postId}) => {
               userImg: userData.userImg,
               userId: userData.userId,
               commentId: uuid(),
+              imgRef: doc(db, 'users/' + userData?.userId)
             })
           })
         } catch(err) {

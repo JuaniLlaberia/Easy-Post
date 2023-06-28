@@ -19,5 +19,8 @@
     "react-icons": "^4.9.0",
     "react-spinners": "^0.13.8",
     "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "encoding": "^0.1.13"
   }
 }

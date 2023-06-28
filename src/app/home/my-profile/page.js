@@ -9,7 +9,7 @@ import { faLocationDot, faPen, faUser } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react";
 import UpdateProfileModal from "@/components/UpdateProfileModal";
 import PostContainerProfile from "@/components/PostContainerProfile";
-import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import { collection, getDoc, getDocs, orderBy, query, where } from "firebase/firestore";
 import { db } from "@/firebase_config";
 import { useTheme } from "@/context/ThemeContext";
 
@@ -18,8 +18,10 @@ const MyProfilePage = () => {
   const [showModal, setShowModal] = useState(false);
   const [posts, setPosts] = useState([]);
   const {theme} = useTheme();
+//   const [userImg, setUserImg] = useState('');
 
   useEffect(() => {
+    console.log('Re fetching user Data');
     const getMyPosts = async () => {
         if(!userData?.username) return;
         try {
@@ -31,13 +33,23 @@ const MyProfilePage = () => {
                     postData: post.data()
                 });
                 setPosts(tempArr);
+                console.log(tempArr);
             });
         } catch(err) {
             console.log(err);
         }
     }
     getMyPosts()
-  }, [userData?.username]);
+  }, [userData?.username, userData?.userImgId]);
+
+//   useEffect(() => {
+//     const test = async () => {
+//         const data = await getDoc(posts[1]?.postData.imgRef);
+//         console.log(data.data().userImg);
+//         setUserImg(data.data().userImg);
+//     };
+//     test()
+//   }, [posts])
 
   return (
     <main className={`my-profile-page ${theme === 'light' ? 'light' : ''}`}>

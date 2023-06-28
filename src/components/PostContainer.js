@@ -29,7 +29,7 @@ const PostContainer = () => {
     }, []);
 
     const renderPosts = posts?.map(post => {
-        return <PostItemFeed key={post.id} date={post?.data?.date?.seconds} id={post.id} img={post.data.imgPath} likeNum={post.data.likesNum} userName={post.data.userName} userImg={post.data.userPhotoURl} body={post.data.postBody} />
+        return <PostItemFeed key={post.id} date={post?.data?.date?.seconds} id={post.id} img={post.data.imgPath} userRef={post.data.imgRef} likeNum={post.data.likesNum} userName={post.data.userName} userImg={post.data.userPhotoURl} body={post.data.postBody} />
     });
 
   return (

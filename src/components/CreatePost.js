@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { db, storage } from '../firebase_config';
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp, doc } from "firebase/firestore";
 import { useAuthContext } from "../context/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
@@ -50,7 +50,6 @@ const CreatePost = () => {
 
             await addDoc(collectionPostsRef, {
                 createdBy: currentAcc?.uid,
-                userPhotoURl: userData?.userImg,
                 userName: userData?.username,
                 postBody: postText,
                 updated: false,
@@ -60,6 +59,7 @@ const CreatePost = () => {
                 date: serverTimestamp(),
                 imgPath: filePath,
                 imgId: imageId,
+                imgRef: doc(db, 'users/' + currentAcc?.uid)
             })
         } catch(err) {
             console.log(err);

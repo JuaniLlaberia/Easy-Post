@@ -1,7 +1,7 @@
 'use client'
 
 import { db } from "@/firebase_config";
-import { doc, onSnapshot} from "firebase/firestore";
+import { doc, getDoc, onSnapshot} from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams} from "next/navigation"
@@ -23,11 +23,13 @@ import { useTheme } from "@/context/ThemeContext";
 const PostPage = () => {
   const {currentAcc, userData} = useAuthContext();
   const { id } = useParams();
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState(null);
   const docRef = doc(db, 'posts', id)
   const [modalOpen, setModalOpen] = useState(false);
   const [modalOpenDelete, setModalOpenDelete] = useState(false);
   const {theme} = useTheme();
+  const [userImg, setUserImg] = useState('');   
+
 
   useEffect(() => {
     const unsuscribe = onSnapshot(docRef, snapshot => {
@@ -38,12 +40,21 @@ const PostPage = () => {
 
   const isLikedByUser = post?.likedBy?.some(user => user === userData?.username)
 
+  useEffect(() => {
+    const test = async () => {
+      if(!post) return;
+      const data = await getDoc(post.imgRef);
+      setUserImg(data.data().userImg);
+  };
+    test()
+  }, [post]);
+
   return (
     <main className={`post-page ${theme === 'light' ? 'light' : ''}`}>
       <div className='post-page-contaiener'>
         <div className='post-top-section'>
             <Link href={`/home/profile/${post?.userName}`} style={{display:'flex', alignItems:'center', gap:'10px'}}>
-              {post?.userPhotoURl ? <Image draggable={false} src={post?.userPhotoURl} width={50} height={50} alt="user"/> : null}
+              {userImg ? <Image draggable={false} src={userImg} width={50} height={50} alt="user"/> : null}
               {post?.userName}
               {post?.updated && <span className='edited'>(edited)</span>}
             </Link>
