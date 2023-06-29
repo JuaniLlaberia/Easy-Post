@@ -28,7 +28,7 @@ const DeletePost = ({toggleModal, docID, photoPath}) => {
         <button onClick={handleRemovePost} className="remove">Remove</button>
       </div>
     </div>
-    <div onClick={toggleModal} className="overlay"></div>
+    <div onClick={toggleModal} className="overlay-post"></div>
     </>
   )
 }

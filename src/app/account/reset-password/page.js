@@ -35,7 +35,7 @@ const ResetPasswordPage = () => {
                 <button className='reset-btn' onClick={() => newPassword(email)}>Reset</button>
             </div>
         </form>
-        <Link href='/account' className='go-back'><FontAwesomeIcon icon={faArrowLeftLong}/> Go back</Link>
+        <Link href='/account/login' className='go-back'><FontAwesomeIcon icon={faArrowLeftLong}/> Go back</Link>
     </main>
   )
 }

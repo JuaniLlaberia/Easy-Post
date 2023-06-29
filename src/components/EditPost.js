@@ -26,7 +26,7 @@ const EditPost = ({toggleModal, body, docID}) => {
         <textarea placeholder="Write your post text here" value={text} onChange={e => setText(e.target.value)}/>
         <button onClick={handleUpdate}>Save</button>
     </div>
-    <div className="overlay" onClick={toggleModal}></div>
+    <div className="overlay-post" onClick={toggleModal}></div>
     </>
   )
 }

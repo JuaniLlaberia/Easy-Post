@@ -46,7 +46,7 @@ const LoginPage = () => {
           <Link href='/account/reset-password'>Forgot password?</Link>
         </div>
       </form>
-      {/* <Link href='/' className='go-back'><FontAwesomeIcon icon={faArrowLeftLong}/> Go back</Link> */}
+      <Link href='/' className='go-back'><FontAwesomeIcon icon={faArrowLeftLong}/> Go back</Link>
     </main>
   )
 }

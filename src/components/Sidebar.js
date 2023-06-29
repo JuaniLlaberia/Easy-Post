@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation';
 
 const Sidebar = () => {
     const [isActive, setIsActive] = useState(false);
-    const {currentAcc, logout, userData} = useAuthContext();
+    const {currentAcc, logout} = useAuthContext();
 
     const router = useRouter();
     const logoutAcc = () => {

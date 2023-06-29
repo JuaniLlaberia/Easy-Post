@@ -95,7 +95,7 @@ const UserSignUpPage = () => {
             <Link href='/account/login' className='login-already'>Already register?</Link>
           </div>
         </form>
-        {/* <Link href='/' className='go-back'><FontAwesomeIcon icon={faArrowLeftLong}/> Go back</Link> */}
+        <Link href='/' className='go-back'><FontAwesomeIcon icon={faArrowLeftLong}/> Go back</Link>
     </main>
   )
 }

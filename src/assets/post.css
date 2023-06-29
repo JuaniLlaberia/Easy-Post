@@ -185,7 +185,7 @@
     color: white;
 }
 
-.overlay {
+.overlay-post {
     position: fixed;
     width: 100%;
     height: 100vh;
@@ -197,7 +197,8 @@
 
 .delete-modal {
     width: 40vw;
-    max-width: 300px;
+    max-width: 350px;
+    min-width: 200px;
     height: auto;
 }
 
