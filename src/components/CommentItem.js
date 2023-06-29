@@ -46,8 +46,8 @@ const CommentItem = ({commentBody, userName, postId, commentId, crrUser, imgUser
         <Link href={crrUser === userName ? '/home/my-profile' : `/home/profile/${userName}`}>
             {userImg ? <Image src={userImg} draggable={false} width={50} height={50} alt="user"/> : null}
             <h6>@{userName}</h6>
-            {userName === crrUser ? <button className='delete-comment-btn' onClick={handleCommentRemoval}><FontAwesomeIcon icon={faTrashCan}/></button> : null}
         </Link>
+        {userName === crrUser ? <button className='delete-comment-btn' onClick={handleCommentRemoval}><FontAwesomeIcon icon={faTrashCan}/></button> : null}
         <p>{commentBody}</p>
     </li>
   )

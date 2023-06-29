@@ -59,9 +59,9 @@ const PostPage = () => {
       {!loading ? <>
       <div className='post-page-contaiener'>
         <div className='post-top-section'>
-            <Link href={`/home/profile/${post?.userName}`} style={{display:'flex', alignItems:'center', gap:'10px'}}>
+            <Link href={post?.userName === userData?.username ? '/home/my-profile' : `/home/profile/${post?.userName}`} style={{display:'flex', alignItems:'center', gap:'10px'}}>
               {userImg ? <Image draggable={false} src={userImg} width={50} height={50} alt="user"/> : null}
-              {post?.userName}
+              @{post?.userName}
               {post?.updated && <span className='edited'>(edited)</span>}
             </Link>
           <p>{formatDate(post?.date?.seconds)}</p>
