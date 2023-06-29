@@ -30,7 +30,7 @@ const Sidebar = () => {
           <Link className='nav-btn' onClick={() => setIsActive(false)} href='/home/my-profile'><FontAwesomeIcon icon={faUser}/> <span className='nav-btn-text'>Profile</span></Link>
         </div>
         <div className='nav-bottom-btns'>
-          <Link href='/home/settings' className='more'><FontAwesomeIcon className='more-symbol' icon={faGear}/> <span className='more-text'>Settings</span></Link>
+          <Link href='/home/settings' className='more' onClick={() => setIsActive(false)}><FontAwesomeIcon className='more-symbol' icon={faGear}/> <span className='more-text'>Settings</span></Link>
           <button className='toggle-nav' onClick={() => setIsActive(!isActive)}><FontAwesomeIcon size="2x" icon={isActive ? faArrowLeft : faBars}/></button>
           {!currentAcc ? null : <button className='more' onClick={logoutAcc}><FontAwesomeIcon className='more-symbol' icon={faRightFromBracket}/> <span className='more-text'>Log Out</span></button>}
         </div>

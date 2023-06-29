@@ -205,7 +205,33 @@
 }
 
 .loading-skeleton.box {
-    width: 500px;
+    width: 70vw;
+    max-width: 500px;
+    min-width: 200px;
     height: 300px;
     border-radius: 4px;
+}
+
+.info-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+@media (max-width:700px) {
+    .profile-top {
+        flex-direction: column;
+        gap: 10px;
+        width: 80vw;
+    }
+    .info-container {
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+    .extra-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }

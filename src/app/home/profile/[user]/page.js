@@ -68,19 +68,20 @@ const Profile = () => {
             <div className='profile-top'>
                 <Image draggable={false} src={profileData?.userImg} width={180} height={180} alt='user'/>
                 <div className='profile-user-info'>
-                    <div style={{display:'flex', alignItems:'center', gap:'20px'}}>
+                    <div className='info-container'>
                       <h1>{profileData?.username}</h1>
                       {userData?.username === profileData?.username ? null : beingFollow ? <button className='follow-btn unfollow' onClick={() => unFollowUser(profileData?.userId, userData?.userId)}>Unfollow</button> : <button className='follow-btn' onClick={() => followUser(profileData?.userId, profileData?.username,userData?.userId, userData?.username)}>Follow</button>}
                     </div>
-                    {profileData?.fullName ? <p><FontAwesomeIcon icon={faUser}/> {profileData?.fullName}</p> : null}
-                    {profileData?.location ? <p><FontAwesomeIcon icon={faLocationDot}/> {profileData?.location}</p> : null}
+                    <div className='extra-info'>
+                      {profileData?.fullName ? <p><FontAwesomeIcon icon={faUser}/> {profileData?.fullName}</p> : null}
+                      {profileData?.location ? <p><FontAwesomeIcon icon={faLocationDot}/> {profileData?.location}</p> : null}
+                    </div>
                 </div>
             </div>
             <section className='post-section'>
                 <h6 className='myprofile-subtitles'>Posts</h6>
                 <PostContainerProfile posts={posts}/>
             </section>
-        {/* </section> : <div>loading...</div>} */}
         </section> :
           <section className='personal-info'>
             <div className='profile-top'>

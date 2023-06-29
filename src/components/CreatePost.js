@@ -76,12 +76,12 @@ const CreatePost = () => {
         <div className={`create-post-container ${theme === 'light' ? 'light' : ''}`}>
             <h3>Create new post</h3>
             <form onSubmit={handleCreatePost}>
-                <textarea value={postText} placeholder='Write your post here' onChange={e => setPostText(e.target.value)} maxLength={300}/>
+                <textarea value={postText} placeholder='Write your post here' onChange={e => setPostText(e.target.value)} maxLength={300} minLength={1}/>
                 <p>{postText.length}/300</p>
                 <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
                   {imgPreview ? <Image src={imgPreview} className="img-preview" width={100} alt="preview" height={100}/> : null}
                 </div>
-                <button disabled={postText.length < 1} className="post">{loadingBtn ? <ClipLoader color="#e981f7" size='20px'/> : 'Post'}</button>
+                <button disabled={postText.length < 1} className="post">{loadingBtn ? <ClipLoader color="#e981f7" size={20}/> : 'Post'}</button>
                 <div style={{position:'absolute', bottom:'5%', display:'flex', gap:'7.5px'}}>
                   <label htmlFor='upload-photo' className='img-input'>
                       <FontAwesomeIcon icon={faImage} style={{color: img ? '#73de3a' : ''}}/>

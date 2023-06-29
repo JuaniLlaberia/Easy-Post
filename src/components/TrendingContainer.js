@@ -5,10 +5,12 @@ import { collection, limit, onSnapshot, orderBy, query } from "firebase/firestor
 import { useEffect, useState } from "react";
 import PostItemFeed from "./PostItemFeed";
 import '../assets/home.css'
+import { useTheme } from "@/context/ThemeContext";
 
 
 const TrendingContainer = () => {
     const [posts, setPosts] = useState([]);
+    const {theme} = useTheme();
 
     const collectionRef = collection(db, 'posts');
     const trendingQuery = query(collectionRef, orderBy('likesNum', 'desc'), orderBy('date', 'desc'), limit(10));
@@ -33,7 +35,7 @@ const TrendingContainer = () => {
     });
 
   return (
-    <ul>
+    <ul className={`post-container ${theme === 'light' ? 'light' : ''}`}>
       {renderPosts}
     </ul>
   )

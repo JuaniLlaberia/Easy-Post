@@ -283,14 +283,17 @@
     background-color: grey;
     padding: 10px;
     border-radius: 4px;
-    width: 500px;
-    height: 200px;
+    width: 70vw;
+    min-width: 300px;
+    max-width: 600px;
+    height: 250px;
 }
 
 .post-skeleton.long {
-    width: 400px;
+    width: 50vw;
+    min-width: 250px;
+    max-width: 500px;
     height: 10px;
-    /* background-color: rebeccapurple; */
     border-radius: 4px;
 }
 
@@ -302,7 +305,9 @@
 }
 
 .post-skeleton.big {
-    width: 250px;
+    width: 50vw;
+    min-width: 150px;
+    max-width: 250px;
     height: 20px;
     border-radius: 4px;
 }
