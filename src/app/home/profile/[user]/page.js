@@ -42,7 +42,6 @@ const Profile = () => {
     const getMyPosts = async () => {
         if(!user) return;
         try {
-          console.log(user);
             const posts = await getDocs(query(collection(db, 'posts'), where('userName', '==', user), orderBy('date', 'desc')));
             const tempArr = [];
             posts.forEach(post => {
@@ -51,7 +50,6 @@ const Profile = () => {
                     postData: post.data()
                 });
                 setPosts(tempArr);
-                console.log(tempArr);
             });
         } catch(err) {
             console.log(err);

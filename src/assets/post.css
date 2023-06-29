@@ -116,10 +116,11 @@
     background-color: rgb(229, 83, 248);
     color: white;
     font-weight: 600;
+    font-size: .9rem;
     padding: 10px;
     cursor: pointer;
     width: 12vw;
-    min-width: 70px;
+    min-width: 80px;
 }
 
 .comments-container {
@@ -148,11 +149,13 @@
     color: var(--main-text-color);
 }
 
-.comment-item div {
+.comment-item a {
     display: flex;
     align-items: center;
     gap: 10px;
     font-size: 1.2rem;
+    text-decoration: none;
+    color: var(--main-text-color);
 }
 
 .modal-edit-post, .delete-modal {

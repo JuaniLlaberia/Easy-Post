@@ -70,10 +70,11 @@ const PostPage = () => {
         <div style={{display:'flex', justifyContent:'center', alignItems:'center', borderBottom:'1px solid rgba(255, 255, 255, 0.105)'}}>
           {post?.imgPath ? <Image draggable={false} className="post-img" src={post?.imgPath} width={400} alt="preview" height={300}/> : null}
         </div>
-        {/* MORE MODULAR AND MORE COMPONENTS */}
         <div className='profile-post-btns'>
-          {currentAcc?.uid === post?.createdBy && <div style={{color:'white'}}>{post?.likesNum}</div>}
-          {isLikedByUser ? <button onClick={() => unLike(id, userData?.username)} className="post-btn"><FontAwesomeIcon size="2x" icon={fullHeart}/></button> : <button onClick={() => addLike(id, userData?.username, post?.userName)} className="post-btn"><FontAwesomeIcon size="2x" icon={faHeart}/></button>}
+          <div style={{display:'flex', gap:'5px'}}>
+            {currentAcc?.uid === post?.createdBy && <div style={{color:'white'}}>{post?.likesNum}</div>}
+            {isLikedByUser ? <button onClick={() => unLike(id, userData?.username)} className="post-btn"><FontAwesomeIcon size="2x" icon={fullHeart} color="#ff5747"/></button> : <button onClick={() => addLike(id, userData?.username, post?.userName)} className="post-btn"><FontAwesomeIcon size="2x" icon={faHeart}/></button>}
+          </div>
           <button className="post-btn"><FontAwesomeIcon size="2x" icon={faBookmark}/></button>
           {currentAcc?.uid === post?.createdBy ? <>
               <button className="post-btn" onClick={() => setModalOpen(true)}><FontAwesomeIcon size="2x" icon={faPenToSquare}/></button>

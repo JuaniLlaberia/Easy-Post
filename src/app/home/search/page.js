@@ -3,7 +3,7 @@
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import '../../../assets/search.css'
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { collection, getDocs, query, where } from "firebase/firestore"
 import { db } from "@/firebase_config"
 import UserItem from "@/components/userItem"
@@ -29,7 +29,6 @@ const SearchPage = () => {
                 tempArr.push(item.data())
             })
             setResults(tempArr)
-            console.log(tempArr);
             setLoading(false);
         } catch(err) {
             console.log(err);
@@ -62,7 +61,6 @@ const SearchPage = () => {
     
 
     const usersToRender = results?.map(user => {
-      console.log(user);
         return <UserItem key={user.userId} userImg={user.userImg} username={user.username}/>
     })
 

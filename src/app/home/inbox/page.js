@@ -17,7 +17,6 @@ const page = () => {
 
     useEffect(() => {
         if (!userData) return;
-        console.log('LD');
         const unsuscribe = onSnapshot(query(collection(db, 'notifications'), where('receiver', '==', userData?.username), orderBy('time', 'desc')), snapshot => {
             const tempArr = [];
             snapshot.forEach(notification => {
@@ -26,7 +25,6 @@ const page = () => {
                     notificationInfo: notification.data(),
                 })
             });
-            console.log(tempArr);
             setNotifications(tempArr);
             setLoadingBtn(false);
         })

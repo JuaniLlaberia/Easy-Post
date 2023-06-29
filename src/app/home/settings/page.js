@@ -2,7 +2,6 @@
 
 import { useTheme } from '@/context/ThemeContext'
 import '../../../assets/settings.css'
-import { faToggleOff } from '@fortawesome/free-solid-svg-icons';
 
 const SettingsPage = () => {
   const {theme, toggleTheme} = useTheme();

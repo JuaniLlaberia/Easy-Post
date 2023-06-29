@@ -21,7 +21,6 @@ const MyProfilePage = () => {
   const {theme} = useTheme();
 
   useEffect(() => {
-    console.log('Re fetching user Data');
     const getMyPosts = async () => {
         if(!userData?.username) return;
         try {
@@ -33,7 +32,6 @@ const MyProfilePage = () => {
                     postData: post.data()
                 });
                 setPosts(tempArr);
-                console.log(tempArr);
             });
         } catch(err) {
             console.log(err);
