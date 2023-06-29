@@ -29,7 +29,7 @@ const PostItemFeed = ({body, date,img, userName, id, userRef}) => {
         <Link href={`/home/post/${id}`} className='link-to-post'>
             <p>{body}</p>
             <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
-                  {img ? <Image src={img} width={400} alt="preview" height={300}/> : null}
+                  {img ? <Image src={img} width={400} alt="preview" height={300} style={{borderRadius:'8px'}}/> : null}
             </div>
         </Link>
     </li>

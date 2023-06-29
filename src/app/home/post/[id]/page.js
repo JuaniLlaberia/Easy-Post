@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import '../../../../assets/post.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark, faHeart, faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
-import { faHeart as fullHeart} from "@fortawesome/free-solid-svg-icons";
+import { faHeart as fullHeart, faBookmark as fullBookMark} from "@fortawesome/free-solid-svg-icons";
 import { useAuthContext } from "@/context/AuthContext";
 import CreateComment from "@/components/CreateComment";
 import CommentsContainer from "@/components/CommentsContainer";
@@ -20,6 +20,8 @@ import { addLike } from "@/utils/addLike";
 import { unLike } from "@/utils/unLike";
 import { useTheme } from "@/context/ThemeContext";
 import PostSkeleton from "@/components/PostSkeleton";
+import { removeFav } from "@/utils/removeFav";
+import { addFav } from "@/utils/addFav";
 
 const PostPage = () => {
   const {currentAcc, userData} = useAuthContext();
@@ -44,6 +46,7 @@ const PostPage = () => {
   }, [id]);
 
   const isLikedByUser = post?.likedBy?.some(user => user === userData?.username)
+  const isSaved = userData?.savedPosts?.some(postId => postId === id)
 
   useEffect(() => {
     const test = async () => {
@@ -75,7 +78,8 @@ const PostPage = () => {
             {currentAcc?.uid === post?.createdBy && <div style={{color:'white'}}>{post?.likesNum}</div>}
             {isLikedByUser ? <button onClick={() => unLike(id, userData?.username)} className="post-btn"><FontAwesomeIcon size="2x" icon={fullHeart} color="#ff5747"/></button> : <button onClick={() => addLike(id, userData?.username, post?.userName)} className="post-btn"><FontAwesomeIcon size="2x" icon={faHeart}/></button>}
           </div>
-          <button className="post-btn"><FontAwesomeIcon size="2x" icon={faBookmark}/></button>
+          {isSaved ? <button onClick={() => removeFav(id, userData?.userId)} className="post-btn"><FontAwesomeIcon size="2x" icon={fullBookMark}/></button> : <button onClick={() => addFav(id, userData?.userId)} className="post-btn"><FontAwesomeIcon size="2x" icon={faBookmark}/></button>}
+          {/* <button className="post-btn"><FontAwesomeIcon size="2x" icon={faBookmark}/></button> */}
           {currentAcc?.uid === post?.createdBy ? <>
               <button className="post-btn" onClick={() => setModalOpen(true)}><FontAwesomeIcon size="2x" icon={faPenToSquare}/></button>
               <button className="post-btn" onClick={() => setModalOpenDelete(true)}><FontAwesomeIcon size="2x" icon={faTrashCan}/></button>

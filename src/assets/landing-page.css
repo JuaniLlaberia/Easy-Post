@@ -1,0 +1,72 @@
+.landing-page {
+    min-height: 100vh;
+    height: auto;
+    background-color: rgb(28, 28, 31);
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    padding-top: 100px;
+}
+
+.landing-page-btns {
+    display: flex;
+    justify-content: center;
+    gap:10px;
+    margin-top: 75px;
+}
+
+.landing-page-btns a {
+    text-decoration: none;
+    background-color: rgb(229, 83, 248);
+    border-radius: 8px;
+    padding: 7.5px 12.5px;
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 600;
+    transition: all .3s ease;
+}
+
+.landing-page-btns a:hover {
+    background-color: rgb(226, 108, 242);
+    cursor: pointer;
+    transform: translateY(4%);
+}
+
+.easypost-title {
+    color: white;
+    font-size: 4rem;
+}
+
+.easypost-subtitle {
+    color: white;
+    font-size: 1.3rem;
+}
+
+.easypost-phrase {
+    color: rgba(255, 255, 255, 0.553);
+    font-size: 1rem;
+}
+
+@media (max-width: 1000px) {
+    .landing-page {
+        flex-direction: column;
+        align-items: center;
+        padding-top: 50px;
+        padding-bottom: 40px;
+    }
+    .landingpage-texts {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80vw;
+    }
+    .login-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .img-landingpage {
+        width: 300px;
+        height: auto;
+    }
+}

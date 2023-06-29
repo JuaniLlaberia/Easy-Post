@@ -3,7 +3,7 @@ import { ThemeProvider } from '@/context/ThemeContext';
 import { Poppins } from 'next/font/google';
 
 export const metadata = {
-  title: 'easyJOB',
+  title: 'easyPOST',
   description: ''
 }
 

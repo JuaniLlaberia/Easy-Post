@@ -1,7 +1,7 @@
 'use client'
 
 import { db } from "@/firebase_config"
-import { collection, doc, getDoc, getDocs, limit, onSnapshot, orderBy, query, startAfter } from "firebase/firestore"
+import { collection, doc, getDoc, getDocs, limit, orderBy, query, startAfter } from "firebase/firestore"
 import { useEffect, useState } from "react";
 import PostItemFeed from "./PostItemFeed";
 import { ClipLoader } from "react-spinners";

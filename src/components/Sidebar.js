@@ -4,10 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../assets/navbar.css'
 import { useState } from "react";
 import Link from "next/link";
-import { faEnvelope, faStar, faUser, faHouse, faMagnifyingGlass, faPlus, faArrowLeft, faBars, faRightFromBracket, faGear  } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faStar, faUser, faHouse, faMagnifyingGlass, faArrowLeft, faBars, faRightFromBracket, faGear  } from '@fortawesome/free-solid-svg-icons';
 import { useAuthContext } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
-
+import Image from 'next/image';
 
 const Sidebar = () => {
     const [isActive, setIsActive] = useState(false);

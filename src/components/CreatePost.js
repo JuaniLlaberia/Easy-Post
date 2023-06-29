@@ -45,9 +45,6 @@ const CreatePost = () => {
 
         //Creating the Post
         try {
-          console.log(currentAcc);
-          console.log(userData);
-
             await addDoc(collectionPostsRef, {
                 createdBy: currentAcc?.uid,
                 userName: userData?.username,

@@ -70,7 +70,7 @@ const fetchPosts = async () => {
     <main className={`my-profile-page ${theme === 'light' ? 'light' : ''}`}>
         {userData !== null ? <section className='personal-info'>
             <div className='profile-top'>
-                <Image draggable={false} src={userData?.userImg} width={180} height={180} alt='user'/>
+                <Image className='profile-img' draggable={false} src={userData?.userImg} width={180} height={180} alt='user'/>
                 <div className='profile-user-info'>
                     <div style={{display:'flex', alignItems:'center' ,gap:'20px'}}>
                         <h1>{userData?.username}</h1>

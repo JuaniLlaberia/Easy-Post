@@ -88,7 +88,7 @@ const Profile = () => {
     <main className={`my-profile-page ${theme === 'light' ? 'light' : ''}`}>
       {profileData !== null ? <section className='personal-info'>
             <div className='profile-top'>
-                <Image draggable={false} src={profileData?.userImg} width={180} height={180} alt='user'/>
+                <Image className="profile-img" draggable={false} src={profileData?.userImg} width={180} height={180} alt='user'/>
                 <div className='profile-user-info'>
                     <div className='info-container'>
                       <h1>{profileData?.username}</h1>

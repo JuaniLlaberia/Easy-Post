@@ -15,6 +15,7 @@
 .post-container {
     --main-bg-color: rgb(28, 28, 31);
     --second-bg-color: #353638;
+    --hover-bg-color: #2e2f30;
     --third-bg-color: rgb(36, 33, 33);
     --main-text-color: white;
     --second-text-color: rgba(255, 255, 255, 0.682);
@@ -24,6 +25,7 @@
 .post-container.light {
     --main-bg-color: rgb(250, 250, 250);
     --second-bg-color: #d7d7d7;
+    --hover-bg-color: #c2c1c1;
     --third-bg-color: #e9e9eb;
     --main-text-color: rgb(0, 0, 0);
     --second-text-color: rgba(0, 0, 0, 0.682);
@@ -41,6 +43,11 @@
     list-style: none;
     position: relative;
     padding-bottom: 10px;
+    transition: all .3s ease;
+}
+
+.post-item-feed:hover {
+    background-color: var(--hover-bg-color);
 }
 
 .link-to-profile{
