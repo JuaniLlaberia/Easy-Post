@@ -7,14 +7,14 @@ import { useEffect, useState } from "react";
 import '../../../../assets/profile.css'
 import '../../../../assets/home.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot, faPen, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot, faUser } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import { useAuthContext } from "@/context/AuthContext";
-import UpdateProfileModal from "@/components/UpdateProfileModal";
 import PostContainerProfile from "@/components/PostContainerProfile";
 import { followUser } from "@/utils/follow";
-import { unFollowUser } from "@/utils/unFollow";
 import { useTheme } from "@/context/ThemeContext";
+import ProfileSkeleton from "@/components/ProfileSkeleton";
+import UnFollowModal from "@/components/UnFollowModal";
 
 const Profile = () => {
   const {user} = useParams();
@@ -43,7 +43,7 @@ const Profile = () => {
         if(!user) return;
         try {
           console.log(user);
-            const posts = await getDocs(query(collection(db, 'posts'), where('userName', '==', user), orderBy('date', 'desc'))); //, orderBy('date', 'desc')
+            const posts = await getDocs(query(collection(db, 'posts'), where('userName', '==', user), orderBy('date', 'desc')));
             const tempArr = [];
             posts.forEach(post => {
                 tempArr.push({
@@ -70,7 +70,7 @@ const Profile = () => {
                 <div className='profile-user-info'>
                     <div className='info-container'>
                       <h1>{profileData?.username}</h1>
-                      {userData?.username === profileData?.username ? null : beingFollow ? <button className='follow-btn unfollow' onClick={() => unFollowUser(profileData?.userId, userData?.userId)}>Unfollow</button> : <button className='follow-btn' onClick={() => followUser(profileData?.userId, profileData?.username,userData?.userId, userData?.username)}>Follow</button>}
+                      {userData?.username === profileData?.username ? null : beingFollow ? <button className='follow-btn unfollow' onClick={() => setShowModal(true)}>Unfollow</button> : <button className='follow-btn' onClick={() => followUser(profileData?.userId, profileData?.username,userData?.userId, userData?.username)}>Follow</button>}
                     </div>
                     <div className='extra-info'>
                       {profileData?.fullName ? <p><FontAwesomeIcon icon={faUser}/> {profileData?.fullName}</p> : null}
@@ -82,22 +82,8 @@ const Profile = () => {
                 <h6 className='myprofile-subtitles'>Posts</h6>
                 <PostContainerProfile posts={posts}/>
             </section>
-        </section> :
-          <section className='personal-info'>
-            <div className='profile-top'>
-                <div className='loading-skeleton medium'></div>
-                <div className='profile-user-info'>
-                    <div style={{display:'flex', alignItems:'center', gap:'20px'}}>
-                      <h1 className='loading-skeleton big'></h1>
-                    </div>
-                    <p className='loading-skeleton small'></p>
-                    <p className='loading-skeleton small'></p>
-                </div>
-            </div>
-            <section className='post-section'>
-                <div className="loading-skeleton box"></div>
-            </section>
-          </section>}
+        </section> : <ProfileSkeleton />}
+        {showModal && <UnFollowModal  user={profileData?.username} toggleModal={() => setShowModal(false)} userId={profileData?.userId} myId={userData?.userId}/>}
     </main>
   )
 }

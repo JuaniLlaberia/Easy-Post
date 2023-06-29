@@ -83,7 +83,7 @@ const UpdateProfileModal = ({toggleModal, username, profileImg, profileImgId, na
         </section>
         <button onClick={handleUpdateProfile}>{loadingBtn ? <ClipLoader color="#e981f7" size='15px'/> : 'Save'}</button>
     </form>
-    <div className="overlay" onClick={toggleModal}></div>
+    <div className="overlay-profile" onClick={toggleModal}></div>
     </>
   )
 }

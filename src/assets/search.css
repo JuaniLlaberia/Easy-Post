@@ -50,7 +50,7 @@
     position: absolute;
     top: 7.5px;
     left: 7.5px;
-    color: var(--second-text-color);
+    color: rgba(0, 0, 0, 0.655);
 }
 
 .searchbar button {
@@ -71,7 +71,7 @@
 
 .search-user-result {
     width: 30vw;
-    background-color: var(--third-bg-color);
+    background-color: var(--second-bg-color);
     box-shadow: 0 1px 5px black;
     margin: 5px;
     list-style: none;

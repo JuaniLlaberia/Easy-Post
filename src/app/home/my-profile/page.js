@@ -12,6 +12,7 @@ import PostContainerProfile from "@/components/PostContainerProfile";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { db } from "@/firebase_config";
 import { useTheme } from "@/context/ThemeContext";
+import ProfileSkeleton from "@/components/ProfileSkeleton";
 
 const MyProfilePage = () => {
   const {userData} = useAuthContext();
@@ -51,29 +52,17 @@ const MyProfilePage = () => {
                         <h1>{userData?.username}</h1>
                         <button className='edit-btn' onClick={() => setShowModal(true)}><FontAwesomeIcon icon={faPen}/></button>
                     </div>
-                    {userData?.fullName ? <p><FontAwesomeIcon icon={faUser}/> {userData?.fullName}</p> : null}
-                    {userData?.location ? <p><FontAwesomeIcon icon={faLocationDot}/> {userData?.location}</p> : null}
+                    <div className='extra-info'>
+                        {userData?.fullName ? <p><FontAwesomeIcon icon={faUser}/> {userData?.fullName}</p> : null}
+                        {userData?.location ? <p><FontAwesomeIcon icon={faLocationDot}/> {userData?.location}</p> : null}
+                    </div>
                 </div>
             </div>
             <h6 className='myprofile-subtitles'>My Posts</h6>
             <section style={{display:'flex', justifyContent:'center'}}>
                 <PostContainerProfile posts={posts}/>
             </section>
-        </section> : <section className='personal-info'>
-            <div className='profile-top'>
-                <div className='loading-skeleton medium'></div>
-                <div className='profile-user-info'>
-                    <div style={{display:'flex', alignItems:'center', gap:'20px'}}>
-                      <h1 className='loading-skeleton big'></h1>
-                    </div>
-                    <p className='loading-skeleton small'></p>
-                    <p className='loading-skeleton small'></p>
-                </div>
-            </div>
-            <section className='post-section'>
-                <div className="loading-skeleton box"></div>
-            </section>
-          </section>}
+        </section> : <ProfileSkeleton />}
         {showModal && <UpdateProfileModal toggleModal={() => setShowModal(false)} username={userData?.username} profileImg={userData?.userImg} userLocation={userData?.location} name={userData?.fullName} profileImgId={userData?.userImgId} userId={userData?.userId}/>}
     </main>
   )

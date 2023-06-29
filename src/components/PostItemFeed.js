@@ -1,5 +1,6 @@
 'use client'
 
+import { useAuthContext } from "@/context/AuthContext"
 import { formatDate } from "@/utils/formatDate"
 import { getDoc } from "firebase/firestore"
 import Image from "next/image"
@@ -8,6 +9,7 @@ import { useEffect, useState } from "react"
 
 const PostItemFeed = ({body, date,img, userName, id, userRef}) => {
     const [userImg, setUserImg] = useState('');
+    const {userData} = useAuthContext();
 
     useEffect(() => {
         const test = async () => {
@@ -19,7 +21,7 @@ const PostItemFeed = ({body, date,img, userName, id, userRef}) => {
 
     return (
     <li className='post-item-feed'>
-        <Link href={`/home/profile/${userName}`} className='link-to-profile'>
+        <Link href={userData?.username === userName ? '/home/my-profile' : `/home/profile/${userName}`} className='link-to-profile'>
             {userImg ? <Image src={userImg} width={50} height={50} alt="user"/> : null}
             <h6>@{userName}</h6>
             <p>{formatDate(date)}</p>
