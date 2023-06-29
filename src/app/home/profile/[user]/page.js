@@ -1,7 +1,7 @@
 'use client'
 
 import { db } from "@/firebase_config";
-import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, limit, orderBy, query, startAfter, where } from "firebase/firestore";
 import { useParams } from "next/navigation"
 import { useEffect, useState } from "react";
 import '../../../../assets/profile.css'
@@ -15,6 +15,7 @@ import { followUser } from "@/utils/follow";
 import { useTheme } from "@/context/ThemeContext";
 import ProfileSkeleton from "@/components/ProfileSkeleton";
 import UnFollowModal from "@/components/UnFollowModal";
+import { ClipLoader } from "react-spinners";
 
 const Profile = () => {
   const {user} = useParams();
@@ -22,6 +23,9 @@ const Profile = () => {
   const {userData} = useAuthContext();
   const [showModal, setShowModal] = useState(false);
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [lastPost, setLastPost] = useState(null);
+  const [hasMorePosts, setHasMorePosts] = useState(true);
   const {theme} = useTheme();
 
   //Getting profile data
@@ -37,25 +41,45 @@ const Profile = () => {
     getProfile()
   }, []);
 
-  //Getting user posts
-  useEffect(() => {
-    const getMyPosts = async () => {
-        if(!user) return;
-        try {
-            const posts = await getDocs(query(collection(db, 'posts'), where('userName', '==', user), orderBy('date', 'desc')));
-            const tempArr = [];
-            posts.forEach(post => {
-                tempArr.push({
-                    postId: post.id,
-                    postData: post.data()
-                });
-                setPosts(tempArr);
-            });
-        } catch(err) {
-            console.log(err);
-        }
+  const fetchPosts = async () => {
+    setLoading(true);
+
+    let q = query(collection(db, 'posts'), where('userName', '==', user), orderBy('date', 'desc'), limit(5));
+
+    //Check if we have a last post and update the query to fetch from that last post
+    if (lastPost) {
+      const lastPostSnapshot = await getDoc(doc(collection(db, 'posts'), lastPost));
+      q = query(collection(db, 'posts'), orderBy('date', 'desc'), startAfter(lastPostSnapshot), where('userName', '==', user) , limit(5));
     }
-    getMyPosts()
+
+    try {
+      //Fetch posts
+      const snapshot = await getDocs(q);
+
+      const newPosts = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      if (newPosts.length > 0) {
+        if (lastPost) {
+          setPosts(prevPosts => [...prevPosts, ...newPosts]);
+        } else {
+          setPosts(newPosts);
+        }
+        setLastPost(newPosts[newPosts.length - 1].id);
+      } else {
+        setHasMorePosts(false);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPosts();
   }, []);
 
   const beingFollow = userData?.following?.some(user => user === profileData?.userId);
@@ -79,6 +103,11 @@ const Profile = () => {
             <section className='post-section'>
                 <h6 className='myprofile-subtitles'>Posts</h6>
                 <PostContainerProfile posts={posts}/>
+                {posts.length < 1 ? null : <div style={{display:'flex', justifyContent:'center', marginBottom:'20px'}}>
+                  {loading && hasMorePosts && <ClipLoader color="#e981f7" size={25}/>}
+                  {!loading && hasMorePosts && <button className='load-more-btn' onClick={fetchPosts}>Load more</button>}
+                  {!hasMorePosts && <p className='loading-msg'>No more Posts.</p>}
+                </div>}
             </section>
         </section> : <ProfileSkeleton />}
         {showModal && <UnFollowModal  user={profileData?.username} toggleModal={() => setShowModal(false)} userId={profileData?.userId} myId={userData?.userId}/>}

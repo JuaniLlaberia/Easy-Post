@@ -3,11 +3,11 @@ import PostItemFeed from "./PostItemFeed";
 const PostContainerProfile = ({posts}) => {
 
   const myPostsToRender = posts?.map(post => {
-    return <PostItemFeed key={post.postId} date={post?.postData?.date?.seconds} id={post.postId} by={post.postData.userName} img={post.postData.imgPath} likeNum={post.postData.likesNum} userName={post.postData.userName} userRef={post.postData.imgRef} body={post.postData.postBody} />
+    return <PostItemFeed key={post.id} date={post?.date?.seconds} id={post.id} by={post.userName} img={post.imgPath} likeNum={post.likesNum} userName={post.userName} userRef={post.imgRef} body={post.postBody} />
 });
   return (
     <ul>
-      {posts.length < 1 ? 'No posts yet' : myPostsToRender}
+      {posts.length < 1 ? <p className='loading-msg'>No posts yet</p> : myPostsToRender}
     </ul>
   )
 }
