@@ -19,6 +19,7 @@ import { formatDate } from "@/utils/formatDate";
 import { addLike } from "@/utils/addLike";
 import { unLike } from "@/utils/unLike";
 import { useTheme } from "@/context/ThemeContext";
+import PostSkeleton from "@/components/PostSkeleton";
 
 const PostPage = () => {
   const {currentAcc, userData} = useAuthContext();
@@ -29,12 +30,16 @@ const PostPage = () => {
   const [modalOpenDelete, setModalOpenDelete] = useState(false);
   const {theme} = useTheme();
   const [userImg, setUserImg] = useState('');
+  const [loading, setLoading] = useState(true);
 
 
   useEffect(() => {
     const unsuscribe = onSnapshot(docRef, snapshot => {
       setPost(snapshot.data());
     })
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000)
     return unsuscribe
   }, [id]);
 
@@ -51,6 +56,7 @@ const PostPage = () => {
 
   return (
     <main className={`post-page ${theme === 'light' ? 'light' : ''}`}>
+      {!loading ? <>
       <div className='post-page-contaiener'>
         <div className='post-top-section'>
             <Link href={`/home/profile/${post?.userName}`} style={{display:'flex', alignItems:'center', gap:'10px'}}>
@@ -77,6 +83,7 @@ const PostPage = () => {
         <CreateComment postId={id}/>
       </div>
       <CommentsContainer commentList={post?.comments} postId={id} crrUser={userData?.username}/>
+      </> : <PostSkeleton/>}
       {modalOpen && <EditPost toggleModal={() => setModalOpen(false)} body={post?.postBody} docID={id}/>}
       {modalOpenDelete && <DeletePost toggleModal={() => setModalOpenDelete(false)} docID={id} photoPath={post?.imgPath}/>}
     </main>

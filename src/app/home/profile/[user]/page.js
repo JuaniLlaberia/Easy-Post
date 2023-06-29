@@ -93,6 +93,9 @@ const Profile = () => {
                     <p className='loading-skeleton small'></p>
                 </div>
             </div>
+            <section className='post-section'>
+                <div className="loading-skeleton box"></div>
+            </section>
           </section>}
     </main>
   )

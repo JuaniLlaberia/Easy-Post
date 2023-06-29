@@ -70,6 +70,9 @@ const MyProfilePage = () => {
                     <p className='loading-skeleton small'></p>
                 </div>
             </div>
+            <section className='post-section'>
+                <div className="loading-skeleton box"></div>
+            </section>
           </section>}
         {showModal && <UpdateProfileModal toggleModal={() => setShowModal(false)} username={userData?.username} profileImg={userData?.userImg} userLocation={userData?.location} name={userData?.fullName} profileImgId={userData?.userImgId} userId={userData?.userId}/>}
     </main>
