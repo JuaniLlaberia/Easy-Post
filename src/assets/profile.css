@@ -170,3 +170,35 @@
     background-color: rgba(0, 0, 0, 0.25);
     cursor: pointer;
 }
+
+
+.loading-skeleton {
+    margin-bottom: 10px;
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: rgb(175, 187, 193);
+    }
+    100% {
+        background-color: rgb(243, 245, 247);
+    }
+}
+
+.loading-skeleton.small {
+    width: 150px;
+    height: 10px;
+}
+
+.loading-skeleton.medium {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    /* background-color: red; */
+}
+
+.loading-skeleton.big {
+    width: 250px;
+    height: 20px;
+}

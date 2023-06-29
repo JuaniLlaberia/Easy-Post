@@ -28,7 +28,7 @@ const PostPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalOpenDelete, setModalOpenDelete] = useState(false);
   const {theme} = useTheme();
-  const [userImg, setUserImg] = useState('');   
+  const [userImg, setUserImg] = useState('');
 
 
   useEffect(() => {

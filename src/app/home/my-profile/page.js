@@ -9,7 +9,7 @@ import { faLocationDot, faPen, faUser } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react";
 import UpdateProfileModal from "@/components/UpdateProfileModal";
 import PostContainerProfile from "@/components/PostContainerProfile";
-import { collection, getDoc, getDocs, orderBy, query, where } from "firebase/firestore";
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { db } from "@/firebase_config";
 import { useTheme } from "@/context/ThemeContext";
 
@@ -18,7 +18,6 @@ const MyProfilePage = () => {
   const [showModal, setShowModal] = useState(false);
   const [posts, setPosts] = useState([]);
   const {theme} = useTheme();
-//   const [userImg, setUserImg] = useState('');
 
   useEffect(() => {
     console.log('Re fetching user Data');
@@ -42,15 +41,6 @@ const MyProfilePage = () => {
     getMyPosts()
   }, [userData?.username, userData?.userImgId]);
 
-//   useEffect(() => {
-//     const test = async () => {
-//         const data = await getDoc(posts[1]?.postData.imgRef);
-//         console.log(data.data().userImg);
-//         setUserImg(data.data().userImg);
-//     };
-//     test()
-//   }, [posts])
-
   return (
     <main className={`my-profile-page ${theme === 'light' ? 'light' : ''}`}>
         {userData !== null ? <section className='personal-info'>
@@ -69,7 +59,18 @@ const MyProfilePage = () => {
             <section style={{display:'flex', justifyContent:'center'}}>
                 <PostContainerProfile posts={posts}/>
             </section>
-        </section> : <div>loading...</div>}
+        </section> : <section className='personal-info'>
+            <div className='profile-top'>
+                <div className='loading-skeleton medium'></div>
+                <div className='profile-user-info'>
+                    <div style={{display:'flex', alignItems:'center', gap:'20px'}}>
+                      <h1 className='loading-skeleton big'></h1>
+                    </div>
+                    <p className='loading-skeleton small'></p>
+                    <p className='loading-skeleton small'></p>
+                </div>
+            </div>
+          </section>}
         {showModal && <UpdateProfileModal toggleModal={() => setShowModal(false)} username={userData?.username} profileImg={userData?.userImg} userLocation={userData?.location} name={userData?.fullName} profileImgId={userData?.userImgId} userId={userData?.userId}/>}
     </main>
   )

@@ -80,8 +80,20 @@ const Profile = () => {
                 <h6 className='myprofile-subtitles'>Posts</h6>
                 <PostContainerProfile posts={posts}/>
             </section>
-        </section> : <div>loading...</div>}
-        {showModal && <UpdateProfileModal toggleModal={() => setShowModal(false)} username={userData?.username} profileImg={userData?.userImg} userLocation={userData?.location} name={userData?.fullName} profileImgId={userData?.userImgId} userId={userData?.userId}/>}
+        {/* </section> : <div>loading...</div>} */}
+        </section> :
+          <section className='personal-info'>
+            <div className='profile-top'>
+                <div className='loading-skeleton medium'></div>
+                <div className='profile-user-info'>
+                    <div style={{display:'flex', alignItems:'center', gap:'20px'}}>
+                      <h1 className='loading-skeleton big'></h1>
+                    </div>
+                    <p className='loading-skeleton small'></p>
+                    <p className='loading-skeleton small'></p>
+                </div>
+            </div>
+          </section>}
     </main>
   )
 }

@@ -7,13 +7,15 @@ import PostItemFeed from "./PostItemFeed";
 
 const PostContainer = () => {
     const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const collectionRef = collection(db, 'posts');
     const firstQuery = query(collectionRef, orderBy('date', 'desc'), limit(10));
-    
+
     // const nextQuery = firstQuery.startAfter()
 
     useEffect(() => {
+        setLoading(true);
         const suscribe = onSnapshot(firstQuery, snapshot => {
             const data = [];
             snapshot.forEach(item => {
@@ -22,9 +24,10 @@ const PostContainer = () => {
                     id: item.id
                 });
             })
-            setPosts(data)
+            setPosts(data);
         });
 
+        setLoading(false);
         return suscribe
     }, []);
 
