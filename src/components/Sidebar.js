@@ -13,9 +13,14 @@ const Sidebar = () => {
     const {currentAcc, logout} = useAuthContext();
 
     const router = useRouter();
-    const logoutAcc = () => {
-      logout();
-      router.push('/');
+    const logoutAcc = async () => {
+      try {
+        await logout();
+        console.log('Goodbye');
+        router.push('/');
+      } catch(err) {
+        console.log(err);
+      }
   };
 
   return (

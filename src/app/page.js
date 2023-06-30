@@ -7,7 +7,7 @@ const InitialPage = () => {
   return (
     <main className='landing-page'>
       <LoginBanner />
-      <Image src={img} width={400} draggable={false} className='img-landingpage'/>
+      <Image src={img} width={400} draggable={false} alt='landing page bg' className='img-landingpage'/>
     </main>
   )
 }

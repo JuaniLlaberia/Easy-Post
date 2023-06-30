@@ -53,7 +53,7 @@ const LoginPage = () => {
         <CustomInput classInput='input-form' classLabel='floating-label' value={email} id='email' required={true} readonly={false} type='text' onChange={e => setEmail(e.target.value)} label='Email Address'/>
         <CustomInput classInput='input-form' classLabel='floating-label' value={password} id='password' required={true} readonly={false} type='password' onChange={e => setPassword(e.target.value)} label='Password'/>
         <div className='btns-container'>
-          <button disabled={loadingBtn} className='create-acc-button'>{loadingBtn ? <ClipLoader color="#e981f7" size='20'/> : 'Log in'}</button>
+          <button disabled={loadingBtn} className='create-acc-button'>{loadingBtn ? <ClipLoader color="#e981f7" size={20}/> : 'Log in'}</button>
           <Link href='/account/reset-password'>Forgot password?</Link>
         </div>
       </form>

@@ -3,6 +3,7 @@
 import { auth, db } from "@/firebase_config";
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from "firebase/auth";
 import { doc, onSnapshot} from "firebase/firestore";
+import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
@@ -10,6 +11,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({children}) => {
     const [currentAcc, setCurrentAcc] = useState(null);
     const [userData, setUserData] = useState(null);
+    const router = useRouter();
 
     //Login to user/company account
     const loginAccount = (email, password) => {
@@ -48,6 +50,7 @@ export const AuthProvider = ({children}) => {
             if(user) {
                 setCurrentAcc(user);
                 fetchUserData(user.uid)
+                router.push('/home')
             };
         });
         return () => unsuscribe;
