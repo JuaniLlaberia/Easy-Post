@@ -3,14 +3,15 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage'
 
+console.log(process.env.NEXTJS_FIREBASE_API_KEY);
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC9vFuICNQL9tUcE3hzIVNpfcfJfJKCl20",
-  authDomain: "jobs-search-app.firebaseapp.com",
-  projectId: "jobs-search-app",
-  storageBucket: "jobs-search-app.appspot.com",
-  messagingSenderId: "453628561493",
-  appId: "1:453628561493:web:86976d9c046363cb172cdc"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 };
 
 
