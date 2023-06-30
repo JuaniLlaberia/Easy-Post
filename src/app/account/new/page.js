@@ -2,7 +2,7 @@
 
 import { useAuthContext } from '@/context/AuthContext'
 import '../../../assets/account.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,6 +11,7 @@ import CustomInput from '@/components/CustomInput';
 import { ClipLoader } from 'react-spinners'
 import { collection, doc, getDocs, query, serverTimestamp, setDoc, where } from 'firebase/firestore';
 import { db } from '@/firebase_config';
+import { faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
 
 const UserSignUpPage = () => {
   const {createAccount} = useAuthContext();
@@ -20,6 +21,7 @@ const UserSignUpPage = () => {
   const [password, setPassword] = useState({password:'', isTouched:false});
   const [confPassword, setConfPassword] = useState({password:'', isTouched:false});
   const [loadingBtn, setLoadingBtn] = useState(false);
+  const [error, setError] = useState('');
 
   //Password validation
   const validatePasswordFormat = (password) => {
@@ -34,6 +36,7 @@ const UserSignUpPage = () => {
 
     //We check that the data is OK
     if(password.password !== confPassword.password) {
+      setError("Passwords don't match");
       console.log('Password dont match');
       return;
     };
@@ -49,6 +52,7 @@ const UserSignUpPage = () => {
     if (!querySnapshot.empty) {
       //Render some UI ERROR
       console.log('Username already taken');
+      setError('Username already taken');
       setLoadingBtn(false);
       return;
     }
@@ -73,9 +77,16 @@ const UserSignUpPage = () => {
       router.push(`/home`);
     } catch(err) {
       console.log(err);
+      setError('Failed to create')
       setLoadingBtn(false);
     };
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setError('');
+    }, 3500);
+  }, [error]);
 
   return (
     <main className='user-signin-page'>
@@ -96,6 +107,7 @@ const UserSignUpPage = () => {
           </div>
         </form>
         <Link href='/' className='go-back'><FontAwesomeIcon icon={faArrowLeftLong}/> Go back</Link>
+        {error ? <p className='error-msg-acc'><FontAwesomeIcon color='red' icon={faXmarkCircle}/>{error}</p> : null}
     </main>
   )
 }

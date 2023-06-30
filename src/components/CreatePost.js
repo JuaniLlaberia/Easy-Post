@@ -1,13 +1,13 @@
 'use client'
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { db, storage } from '../firebase_config';
 import { collection, addDoc, serverTimestamp, doc } from "firebase/firestore";
 import { useAuthContext } from "../context/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid';
-import { faImage } from "@fortawesome/free-regular-svg-icons";
+import { faImage, faXmarkCircle } from "@fortawesome/free-regular-svg-icons";
 import Image from "next/image";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { ClipLoader } from 'react-spinners';
@@ -20,6 +20,7 @@ const CreatePost = () => {
     const [img, setImg] = useState(null);
     const [imgPreview, setImgPreview] = useState(null);
     const [loadingBtn, setLoadingBtn] = useState(false);
+    const [error, setError] = useState('');
     const {theme} = useTheme();
     const collectionPostsRef = collection(db, 'posts');
 
@@ -39,6 +40,7 @@ const CreatePost = () => {
                 filePath = await getDownloadURL(storageRef);
             } catch(err) {
                 console.log('Problem with img.');
+                setError('Problem with img')
                 setLoadingBtn(false);
             }
         };
@@ -60,6 +62,7 @@ const CreatePost = () => {
             })
         } catch(err) {
             console.log(err);
+            setError('Failed to upload')
             setLoadingBtn(false);
         }
         setImg(null);
@@ -67,6 +70,12 @@ const CreatePost = () => {
         setPostText('');
         setLoadingBtn(false);
     };
+
+    useEffect(() => {
+      setTimeout(() => {
+        setError('');
+      }, 3500);
+    }, [error]);
 
   return (
     <>
@@ -94,6 +103,7 @@ const CreatePost = () => {
                 </div>
             </form>
         </div>
+        {error ? <p className='error-msg-home'><FontAwesomeIcon color='red' icon={faXmarkCircle}/>{error}</p> : null}
     </>
   )
 }

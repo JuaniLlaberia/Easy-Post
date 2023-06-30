@@ -165,3 +165,16 @@ textarea.input-form + .floating-label {
 .invalid-label {
     color: rgb(244, 65, 65);
 }
+
+.error-msg-acc {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    position: absolute;
+    bottom: 2.5%;
+    right: 2.5%;
+    background-color: white;
+    padding: 5px;
+    font-size: 1rem;
+    border-radius: 4px;
+}

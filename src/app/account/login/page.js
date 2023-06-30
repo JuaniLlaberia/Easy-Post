@@ -1,7 +1,7 @@
 'use client'
 
 import { useAuthContext } from "@/context/AuthContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,12 +9,14 @@ import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import '../../../assets/account.css';
 import CustomInput from "@/components/CustomInput";
 import { ClipLoader } from 'react-spinners';
+import { faXmarkCircle } from "@fortawesome/free-regular-svg-icons";
 
 const LoginPage = () => {
   const {loginAccount} = useAuthContext();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loadingBtn, setLoadingBtn] = useState(false);
+  const [error, setError] = useState('');
   const router = useRouter();
 
   const handleLogin = async e => {
@@ -30,10 +32,19 @@ const LoginPage = () => {
       await loginAccount(email, password);
     } catch(err) {
       console.log(err);
+      setError("Account doesn't exist");
+      setLoadingBtn(false);
+      return;
     }
     //Redirect home page
     router.push('/home');
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setError('');
+    }, 3500);
+  }, [error]);
 
   return (
     <main className='user-signin-page'>
@@ -47,6 +58,7 @@ const LoginPage = () => {
         </div>
       </form>
       <Link href='/' className='go-back'><FontAwesomeIcon icon={faArrowLeftLong}/> Go back</Link>
+      {error ? <p className='error-msg-acc'><FontAwesomeIcon color='red' icon={faXmarkCircle}/>{error}</p> : null}
     </main>
   )
 }
