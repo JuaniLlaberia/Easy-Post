@@ -36,30 +36,6 @@ const SearchPage = () => {
         }
     };
 
-        // useEffect(() => {
-
-        //   const test = async () => {
-        //     if(searchQuery.length < 1) return;
-        //     setLoading(true);
-        //     try {
-        //         const dta = await getDocs(query(collection(db, 'users'), where('username', '>=', searchQuery), where('username', '<=', searchQuery + '\uf8ff')));
-        //         const tempArr = [];
-        //         dta.forEach(item => {
-        //             tempArr.push(item.data())
-        //         })
-        //         setResults(tempArr)
-        //         setLoading(false);
-        //     } catch(err) {
-        //         console.log(err);
-        //         setLoading(false);
-        //     }
-        //   }
-
-        //   test();
-        // }, [searchQuery])
-
-    
-
     const usersToRender = results?.map(user => {
         return <UserItem key={user.userId} userImg={user.userImg} username={user.username}/>
     })

@@ -37,21 +37,21 @@ const UserSignUpPage = () => {
     //We check that the data is OK
     if(password.password !== confPassword.password) {
       setError("Passwords don't match");
-      console.log('Password dont match');
       return;
     };
 
     setLoadingBtn(true);
 
+    const newUsername = username.username.replace(' ', '').replace('#', '_');
+
     try {
     // Check if the username already exists
     const querySnapshot = await getDocs(
-      query(collection(db, 'users'), where('username', '==', username.username))
+      query(collection(db, 'users'), where('username', '==', newUsername))
     );
 
     if (!querySnapshot.empty) {
       //Render some UI ERROR
-      console.log('Username already taken');
       setError('Username already taken');
       setLoadingBtn(false);
       return;
@@ -63,7 +63,7 @@ const UserSignUpPage = () => {
       //Store user data in database
     await setDoc(doc(db, 'users', user.uid), {
         email: email.email,
-        username: username.username,
+        username: newUsername,
         userId: user.uid,
         date: serverTimestamp(),
         userImg:'https://firebasestorage.googleapis.com/v0/b/jobs-search-app.appspot.com/o/user_placeholder.png?alt=media&token=82bdb08d-e5eb-40e1-8d15-ccef470959d1&_gl=1*1fxd68*_ga*NTE1MzQ4MjUwLjE2ODM1NDIwOTQ.*_ga_CW55HF8NVT*MTY4NjQ2ODQ4My4yMS4xLjE2ODY0NzU0MTAuMC4wLjA.',

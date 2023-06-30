@@ -39,7 +39,6 @@ const CreatePost = () => {
                 await uploadBytes(storageRef, img);
                 filePath = await getDownloadURL(storageRef);
             } catch(err) {
-                console.log('Problem with img.');
                 setError('Problem with img')
                 setLoadingBtn(false);
             }

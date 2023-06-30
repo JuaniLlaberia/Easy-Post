@@ -16,7 +16,6 @@ const Sidebar = () => {
     const logoutAcc = async () => {
       try {
         await logout();
-        console.log('Goodbye');
         router.push('/');
       } catch(err) {
         console.log(err);

@@ -32,7 +32,6 @@ const UpdateProfileModal = ({toggleModal, username, profileImg, profileImgId, na
             if(profileImg !== newProfileImg && profileImgId !== '') {
                 //Remove old image from storage
                 await deleteObject(ref(storage, profileImg));
-                console.log('Old image deleted');
             };
 
             //Upload new image
@@ -41,7 +40,6 @@ const UpdateProfileModal = ({toggleModal, username, profileImg, profileImgId, na
                 const imgRef = ref(storage, `images/${userData?.userId}/userImage.${newProfileImg?.type?.split('/')[1]}`);
                 await uploadBytes(imgRef, newProfileImg);
                 newImgPath = await getDownloadURL(imgRef);
-                console.log(newImgPath);
             };
 
         } catch(err) {
