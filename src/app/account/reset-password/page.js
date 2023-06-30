@@ -5,7 +5,7 @@ import '../../../assets/account.css'
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 import { useAuthContext } from '@/context/AuthContext'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import CustomInput from '@/components/CustomInput'
 import { faXmarkCircle } from '@fortawesome/free-regular-svg-icons'
 
