@@ -67,7 +67,7 @@ const UpdateProfileModal = ({toggleModal, username, profileImg, profileImgId, na
     <form className='modal-edit-profile'>
         <section className='info-left'>
             <p>Change profile image</p>
-            <input style={{display:'none'}} accept="image/jpeg" id='profile-img' type="file" onChange={e => {
+            <input style={{display:'none'}} accept="image/png" id='profile-img' type="file" onChange={e => {
                 setNewProfileImg(e.target.files[0])
                 setPreviewImg(URL.createObjectURL(e.target.files[0]))
                 }}/>
