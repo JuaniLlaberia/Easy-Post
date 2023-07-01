@@ -50,7 +50,7 @@ export const AuthProvider = ({children}) => {
             if(user) {
                 setCurrentAcc(user);
                 fetchUserData(user.uid)
-                router.push('/home')
+                // router.push('/home')
             };
         });
         return () => unsuscribe;
