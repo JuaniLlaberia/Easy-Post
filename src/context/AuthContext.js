@@ -49,8 +49,7 @@ export const AuthProvider = ({children}) => {
         const unsuscribe = onAuthStateChanged(auth, user => {
             if(user) {
                 setCurrentAcc(user);
-                fetchUserData(user.uid)
-                // router.push('/home')
+                fetchUserData(user.uid);
             };
         });
         return () => unsuscribe;

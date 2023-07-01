@@ -24,6 +24,7 @@ const CreatePost = () => {
     const {theme} = useTheme();
     const collectionPostsRef = collection(db, 'posts');
 
+
     const handleCreatePost = async e => {
         e.preventDefault();
         setLoadingBtn(true);

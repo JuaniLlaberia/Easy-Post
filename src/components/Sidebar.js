@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../assets/navbar.css'
 import { useState } from "react";
 import Link from "next/link";
-import { faEnvelope, faStar, faUser, faHouse, faMagnifyingGlass, faArrowLeft, faBars, faRightFromBracket, faGear  } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faStar, faUser, faHouse, faMagnifyingGlass, faArrowLeft, faBars, faRightFromBracket, faGear, faArrowRightToBracket  } from '@fortawesome/free-solid-svg-icons';
 import { useAuthContext } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 
@@ -35,7 +35,7 @@ const Sidebar = () => {
         <div className='nav-bottom-btns'>
           <Link href='/home/settings' className='more' onClick={() => setIsActive(false)}><FontAwesomeIcon className='more-symbol' icon={faGear}/> <span className='more-text'>Settings</span></Link>
           <button className='toggle-nav' onClick={() => setIsActive(!isActive)}><FontAwesomeIcon size="2x" icon={isActive ? faArrowLeft : faBars}/></button>
-          {!currentAcc ? null : <button className='more' onClick={logoutAcc}><FontAwesomeIcon className='more-symbol' icon={faRightFromBracket}/> <span className='more-text'>Log Out</span></button>}
+          {!currentAcc ? <Link className='more' href='/account/login'><FontAwesomeIcon className='more-symbol' icon={faArrowRightToBracket}/> <span className='more-text'>Log In</span></Link> : <button className='more' onClick={logoutAcc}><FontAwesomeIcon className='more-symbol' icon={faRightFromBracket}/> <span className='more-text'>Log Out</span></button>}
         </div>
       </nav>
       {isActive && <div className='overlay' onClick={() => setIsActive(false)}></div>}
