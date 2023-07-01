@@ -11,7 +11,8 @@ const GuardRoute = ({children}) => {
 
   useEffect(() => {
     if(!currentAcc) {
-        router.push('/account/login')
+      console.log(currentAcc);
+      router.push('/account/login');
     }
   },  [currentAcc]);
 
