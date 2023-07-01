@@ -35,9 +35,11 @@ const TrendingContainer = () => {
     });
 
   return (
-    <ul className={`post-container ${theme === 'light' ? 'light' : ''}`}>
-      {renderPosts}
-    </ul>
+    <>
+      {posts.length >= 1 ? <ul className={`post-container ${theme === 'light' ? 'light' : ''}`}>
+        {renderPosts}
+      </ul> : <div className="loading-msg">No posts available</div>}
+    </>
   )
 }
 
