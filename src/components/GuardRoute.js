@@ -10,9 +10,6 @@ const GuardRoute = ({children}) => {
   const router = useRouter();
 
   useEffect(() => {
-    if(currentAcc) {
-      console.log('IS AUTH');
-    }
 
     if(!currentAcc) {
       console.log('IS NOT AUTH');

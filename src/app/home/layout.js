@@ -4,10 +4,10 @@ import Sidebar from "@/components/Sidebar";
 export default function HomeLayout({ children }) {
   return (
       <>
-      {/* <GuardRoute> */}
+      <GuardRoute>
         <Sidebar/>
         {children}
-      {/* </GuardRoute> */}
+      </GuardRoute>
       </>
   )
 }
